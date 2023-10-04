@@ -1,7 +1,7 @@
 # Личный проект «Кекстаграм»
 
-* Студент: [Константин Поликанин](https://up.htmlacademy.ru/javascript/30/user/693219).
-* Наставник: `Неизвестно`.
+- Студент: [Константин Поликанин](https://up.htmlacademy.ru/javascript/30/user/693219).
+- Наставник: [Arthur Litovko](https://htmlacademy.ru/profile/id6927).
 
 ---
 
