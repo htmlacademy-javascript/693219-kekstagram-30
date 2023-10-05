@@ -11,13 +11,13 @@ jobs:
     name: Check
     runs-on: ubuntu-latest
     steps:
+    - uses: actions/checkout@master
+      name: Checkout
+
     - name: Set up Node.js
       uses: actions/setup-node@v3
       with:
         cache: 'npm'
-
-    - uses: actions/checkout@master
-      name: Checkout
 
     - name: Install dependencies
       run: |
