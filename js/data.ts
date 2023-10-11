@@ -35,16 +35,28 @@ const sentences: string[] = [
   'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!',
 ];
 
+/**
+ * Возвращает случайное имя из заданного списка.
+ * @returns {string} - Случайное имя.
+ */
 const getRandomAuthorName = (): string => {
   const randomIndex: number = getRandomNumber(0, names.length - 1);
   return names[randomIndex];
 };
 
+/**
+ * Возвращает случайное предложение из заданного списка.
+ * @returns {string} - Случайное предложение.
+ */
 const getRandomCommentMessage = (): string => {
   const randomIndex: number = getRandomNumber(0, sentences.length - 1);
   return sentences[randomIndex];
 };
 
+/**
+ * Создает комментарий с случайными данными.
+ * @returns {MyComment} - Объект комментария.
+ */
 const createComment = (): MyComment => ({
   id: getRandomNumber(1, 1000),
   avatar: `img/avatar-${getRandomNumber(1, 6)}.svg`,
@@ -52,6 +64,11 @@ const createComment = (): MyComment => ({
   name: getRandomAuthorName(),
 });
 
+/**
+ * Создает фотографию с случайными данными.
+ * @param {number} id - Идентификатор фотографии.
+ * @returns {MyPhoto} - Объект фотографии.
+ */
 const createPhoto = (id: number): MyPhoto => {
   const commentsCount: number = getRandomNumber(0, 30);
   const comments: MyComment[] = Array.from(
@@ -68,6 +85,11 @@ const createPhoto = (id: number): MyPhoto => {
   };
 };
 
+/**
+ * Генерирует массив фотографий с случайными данными.
+ * @param {number} [length=25] - Длина массива фотографий (по умолчанию 25).
+ * @returns {PhotosArray} - Массив фотографий.
+ */
 const generatePhotosArray = (length: number = 25): PhotosArray =>
   Array.from({ length }, (_, index) => createPhoto(index + 1));
 
