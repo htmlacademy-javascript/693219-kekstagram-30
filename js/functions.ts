@@ -1,4 +1,4 @@
-enum Default {
+enum myDefault {
   maxLength = 140,
 }
 
@@ -10,7 +10,7 @@ enum Default {
  */
 const checkStringLength = (
   inputString: string,
-  maxLength: number = Default.maxLength
+  maxLength: number = myDefault.maxLength
 ): boolean => inputString.length <= maxLength;
 
 /**

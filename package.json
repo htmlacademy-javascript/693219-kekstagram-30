@@ -22,7 +22,7 @@
   "license": "MIT",
   "scripts": {
     "start": "vite --port 3000 --open",
-    "lint": "eslint js/",
+    "lint": "eslint \"**/*.{ts,tsx}\"",
     "build": "tsc && vite build",
     "fix": "eslint js/ --fix",
     "preview": "vite preview",
