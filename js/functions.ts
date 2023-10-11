@@ -42,4 +42,41 @@ const extractAndSumDigits = (input: string | number): number => {
   return parseInt(digits.join(''));
 };
 
-export { checkStringLength, isPalindrome, extractAndSumDigits };
+/**
+ * Проверяет, укладывается ли встреча в рамки рабочего дня.
+ * @param {string} startWorkDay - Время начала рабочего дня в формате 'часы:минуты'.
+ * @param {string} endWorkDay - Время конца рабочего дня в формате 'часы:минуты'.
+ * @param {string} startMeeting - Время начала встречи в формате 'часы:минуты'.
+ * @param {number} meetingDuration - Продолжительность встречи в минутах.
+ * @returns {boolean} - Возвращает true, если встреча укладывается в рамки рабочего дня, иначе false.
+ */
+function isMeetingWithinWorkingHours(
+  startWorkDay: string,
+  endWorkDay: string,
+  startMeeting: string,
+  meetingDuration: number
+): boolean {
+  const parseTime = (time: string): number => {
+    const [hours, minutes] = time.split(':').map(Number);
+    return hours * 60 + minutes; // Преобразование времени в минуты
+  };
+
+  const startWorkMinutes: number = parseTime(startWorkDay);
+  const endWorkMinutes: number = parseTime(endWorkDay);
+  const startMeetingMinutes: number = parseTime(startMeeting);
+  const endMeetingMinutes: number = startMeetingMinutes + meetingDuration;
+
+  // Добавлено условие для проверки продолжительности встречи
+  return (
+    startMeetingMinutes >= startWorkMinutes &&
+    endMeetingMinutes <= endWorkMinutes &&
+    meetingDuration > 0
+  );
+}
+
+export {
+  checkStringLength,
+  isPalindrome,
+  extractAndSumDigits,
+  isMeetingWithinWorkingHours,
+};

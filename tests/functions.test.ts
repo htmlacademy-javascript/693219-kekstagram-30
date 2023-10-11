@@ -3,6 +3,7 @@ import {
   checkStringLength,
   isPalindrome,
   extractAndSumDigits,
+  isMeetingWithinWorkingHours,
 } from '../js/functions';
 
 describe('Функция для проверки длины строки.', () => {
@@ -47,4 +48,44 @@ describe('Функция для извлечения цифр из строки.
   it('Число вернет число', () => expect(extractAndSumDigits(2023)).toBe(2023));
   it('Дробное число', () => expect(extractAndSumDigits(1.5)).toBe(15));
   it('Отрицательное число', () => expect(extractAndSumDigits(-1)).toBe(1));
+});
+
+describe('isMeetingWithinWorkingHours', () => {
+  it('должна возвращать true, если встреча укладывается в рабочее время', () => {
+    expect(isMeetingWithinWorkingHours('08:00', '17:30', '14:00', 90)).toBe(
+      true
+    );
+    expect(isMeetingWithinWorkingHours('8:0', '10:0', '8:0', 120)).toBe(true);
+  });
+
+  it('должна возвращать false, если встреча выходит за рабочее время', () => {
+    expect(isMeetingWithinWorkingHours('08:00', '14:30', '14:00', 90)).toBe(
+      false
+    );
+    expect(isMeetingWithinWorkingHours('14:00', '17:30', '08:0', 90)).toBe(
+      false
+    );
+    expect(isMeetingWithinWorkingHours('8:00', '17:30', '08:00', 900)).toBe(
+      false
+    );
+  });
+
+  // Дополнительные тесты с другими значениями
+  it('должна возвращать true для других рабочих часов и времени встречи', () => {
+    expect(isMeetingWithinWorkingHours('09:00', '18:00', '12:30', 120)).toBe(
+      true
+    );
+  });
+
+  it('должна возвращать false, если встреча начинается до начала рабочего времени', () => {
+    expect(isMeetingWithinWorkingHours('09:00', '18:00', '08:30', 60)).toBe(
+      false
+    );
+  });
+
+  it('должна возвращать false, если продолжительность встречи равна 0', () => {
+    expect(isMeetingWithinWorkingHours('09:00', '18:00', '12:00', 0)).toBe(
+      false
+    );
+  });
 });
