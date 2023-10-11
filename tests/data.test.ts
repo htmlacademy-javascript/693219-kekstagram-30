@@ -8,7 +8,7 @@ import {
   generatePhotosArray,
   names,
   sentences,
-} from './data';
+} from '../js/data';
 
 function getRandomAuthorIndex(): number {
   return getRandomNumber(0, names.length - 1);

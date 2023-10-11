@@ -3,7 +3,7 @@ import {
   checkStringLength,
   isPalindrome,
   extractAndSumDigits,
-} from './functions';
+} from '../js/functions';
 
 describe('Функция для проверки длины строки.', () => {
   const TEST_STRING = 'проверяемая строка';
