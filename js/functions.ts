@@ -3,46 +3,43 @@ enum Default {
 }
 
 /**
- * @description Функция для проверки длины строки. Она принимает строку, которую нужно проверить, и максимальную длину и возвращает true, если строка меньше или равна указанной длине, и false, если строка длиннее
- * @param inputString
- * @param maxLength
- * @returns boolean
+ * @description Функция для проверки длины строки.
+ * @param inputString - Входная строка для проверки.
+ * @param maxLength - Максимальная длина (по умолчанию - 140).
+ * @returns {boolean} - Возвращает true, если строка не превышает максимальную длину, иначе false.
  */
-const checkStringLength = function (
+const checkStringLength = (
   inputString: string,
   maxLength: number = Default.maxLength
-) {
-  return inputString.length <= maxLength;
-};
+): boolean => inputString.length <= maxLength;
 
 /**
  * @description Функция для проверки, является ли строка палиндромом.
- * @param inputString
- * @returns
+ * @param inputString - Входная строка для проверки.
+ * @returns {boolean} - Возвращает true, если строка является палиндромом, иначе false.
  */
-function isPalindrome(inputString: string) {
+const isPalindrome = (inputString: string): boolean => {
   const cleanedString = inputString.toLowerCase().replace(/\s/g, '');
-
   return cleanedString === cleanedString.split('').reverse().join('');
-}
+};
 
 /**
- * @description Функция принимает строку, извлекает содержащиеся в ней цифры от 0 до 9 и возвращает их в виде целого положительного числа
- * @param input
- * @returns
+ * @description Функция принимает строку, извлекает содержащиеся в ней цифры от 0 до 9 и возвращает их в виде целого положительного числа.
+ * @param input - Входная строка или число для извлечения цифр.
+ * @returns {number} - Возвращает извлеченные цифры в виде целого положительного числа. Если цифр нет, возвращает NaN.
  */
-function extractAndSumDigits(input: string | number) {
+const extractAndSumDigits = (input: string | number): number => {
   if (typeof input === 'number') {
     input = input.toString();
   }
 
-  let digits = input.match(/\d/g);
+  const digits = input.match(/\d/g);
 
   if (digits === null) {
     return NaN;
   }
 
   return parseInt(digits.join(''));
-}
+};
 
 export { checkStringLength, isPalindrome, extractAndSumDigits };
