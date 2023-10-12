@@ -1,4 +1,4 @@
-import { getRandomNumber } from './util';
+import { getRandomNumber, getRandomStringElement } from './util';
 
 interface MyComment {
   id: number;
@@ -36,32 +36,14 @@ const sentences: string[] = [
 ];
 
 /**
- * Возвращает случайное имя из заданного списка.
- * @returns {string} - Случайное имя.
- */
-const getRandomAuthorName = (): string => {
-  const randomIndex: number = getRandomNumber(0, names.length - 1);
-  return names[randomIndex];
-};
-
-/**
- * Возвращает случайное предложение из заданного списка.
- * @returns {string} - Случайное предложение.
- */
-const getRandomCommentMessage = (): string => {
-  const randomIndex: number = getRandomNumber(0, sentences.length - 1);
-  return sentences[randomIndex];
-};
-
-/**
  * Создает комментарий с случайными данными.
  * @returns {MyComment} - Объект комментария.
  */
 const createComment = (): MyComment => ({
   id: getRandomNumber(1, 1000),
   avatar: `img/avatar-${getRandomNumber(1, 6)}.svg`,
-  message: getRandomCommentMessage(),
-  name: getRandomAuthorName(),
+  message: getRandomStringElement(sentences),
+  name: getRandomStringElement(names),
 });
 
 /**
@@ -93,13 +75,4 @@ const createPhoto = (id: number): MyPhoto => {
 const generatePhotosArray = (length: number = 25): PhotosArray =>
   Array.from({ length }, (_, index) => createPhoto(index + 1));
 
-export {
-  getRandomNumber,
-  getRandomAuthorName,
-  getRandomCommentMessage,
-  createComment,
-  createPhoto,
-  generatePhotosArray,
-  names,
-  sentences,
-};
+export { createComment, createPhoto, generatePhotosArray, names, sentences };

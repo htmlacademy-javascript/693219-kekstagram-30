@@ -1,8 +1,6 @@
 import { expect, test } from 'vitest';
+import { getRandomStringElement, getRandomNumber } from '../js/util';
 import {
-  getRandomNumber,
-  getRandomAuthorName,
-  getRandomCommentMessage,
   createComment,
   createPhoto,
   generatePhotosArray,
@@ -18,12 +16,10 @@ function getRandomSentenceIndex(): number {
   return getRandomNumber(0, sentences.length - 1);
 }
 
-test('getRandomNumber generates a number within the specified range', () => {
-  const min = 1;
-  const max = 10;
-  const result = getRandomNumber(min, max);
-  expect(result).toBeGreaterThanOrEqual(min);
-  expect(result).toBeLessThanOrEqual(max);
+test('getRandomNumber должна возвращать случайную строку из массива', () => {
+  const stringArray: string[] = ['apple', 'banana', 'orange', 'grape', 'kiwi'];
+  const result = getRandomStringElement(stringArray);
+  expect(stringArray).toContain(result);
 });
 
 test('getRandomNumber генерирует число в указанном диапазоне', () => {
@@ -44,16 +40,6 @@ test('getRandomSentenceIndex возвращает корректный инде�
   const result = getRandomSentenceIndex();
   expect(result).toBeGreaterThanOrEqual(0);
   expect(result).toBeLessThan(sentences.length);
-});
-
-test('getRandomAuthorName возвращает корректное имя', () => {
-  const result = getRandomAuthorName();
-  expect(names).toContain(result);
-});
-
-test('getRandomCommentMessage возвращает корректное предложение', () => {
-  const result = getRandomCommentMessage();
-  expect(sentences).toContain(result);
 });
 
 test('createComment возвращает корректный объект комментария', () => {
