@@ -1,21 +1,26 @@
-import { getRandomNumber, getRandomStringElement } from './util';
+import {
+  getRandomNumber,
+  getRandomElement,
+  createUniqueIdGenerator,
+} from './util';
+const generateRandomId = createUniqueIdGenerator(1, 1000);
 
-interface MyComment {
+interface Comment {
   id: number;
   avatar: string;
-  message: string;
-  name: string;
+  message: string | undefined;
+  name: string | undefined;
 }
 
-interface MyPhoto {
+interface Photo {
   id: number;
   url: string;
   description: string;
   likes: number;
-  comments: MyComment[];
+  comments: Comment[];
 }
 
-type PhotosArray = MyPhoto[];
+type PhotosArray = Photo[];
 
 const names: string[] = [
   'Алексей',
@@ -37,23 +42,23 @@ const sentences: string[] = [
 
 /**
  * Создает комментарий с случайными данными.
- * @returns {MyComment} - Объект комментария.
+ * @returns Объект комментария.
  */
-const createComment = (): MyComment => ({
-  id: getRandomNumber(1, 1000),
+const createComment = (): Comment => ({
+  id: generateRandomId(),
   avatar: `img/avatar-${getRandomNumber(1, 6)}.svg`,
-  message: getRandomStringElement(sentences),
-  name: getRandomStringElement(names),
+  message: getRandomElement(sentences),
+  name: getRandomElement(names),
 });
 
 /**
  * Создает фотографию с случайными данными.
- * @param {number} id - Идентификатор фотографии.
- * @returns {MyPhoto} - Объект фотографии.
+ * @param id - Идентификатор фотографии.
+ * @returns Объект фотографии.
  */
-const createPhoto = (id: number): MyPhoto => {
+const createPhoto = (id: number): Photo => {
   const commentsCount: number = getRandomNumber(0, 30);
-  const comments: MyComment[] = Array.from(
+  const comments: Comment[] = Array.from(
     { length: commentsCount },
     createComment
   );
@@ -69,10 +74,10 @@ const createPhoto = (id: number): MyPhoto => {
 
 /**
  * Генерирует массив фотографий с случайными данными.
- * @param {number} [length=25] - Длина массива фотографий (по умолчанию 25).
- * @returns {PhotosArray} - Массив фотографий.
+ * @param length - Длина массива фотографий (по умолчанию 25).
+ * @returns Массив фотографий.
  */
 const generatePhotosArray = (length: number = 25): PhotosArray =>
-  Array.from({ length }, (_, index) => createPhoto(index + 1));
+  Array.from({ length }, () => createPhoto(generateRandomId()));
 
 export { createComment, createPhoto, generatePhotosArray, names, sentences };

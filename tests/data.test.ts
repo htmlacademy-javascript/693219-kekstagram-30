@@ -1,12 +1,16 @@
 import { expect, test } from 'vitest';
-import { getRandomStringElement, getRandomNumber } from '../js/util';
+import {
+  getRandomElement,
+  getRandomNumber,
+  createUniqueIdGenerator,
+} from '../js/util';
 import {
   createComment,
   createPhoto,
   generatePhotosArray,
   names,
   sentences,
-} from '../js/data';
+} from '../js/mock';
 
 function getRandomAuthorIndex(): number {
   return getRandomNumber(0, names.length - 1);
@@ -18,7 +22,7 @@ function getRandomSentenceIndex(): number {
 
 test('getRandomNumber должна возвращать случайную строку из массива', () => {
   const stringArray: string[] = ['apple', 'banana', 'orange', 'grape', 'kiwi'];
-  const result = getRandomStringElement(stringArray);
+  const result = getRandomElement(stringArray);
   expect(stringArray).toContain(result);
 });
 
@@ -63,4 +67,33 @@ test('generatePhotosArray возвращает массив указанной �
   const length = 5;
   const photosArray = generatePhotosArray(length);
   expect(photosArray).toHaveLength(length);
+});
+
+test('generateRandomId проверяем, что id уникальны', () => {
+  const generateRandomId = createUniqueIdGenerator(1, 10);
+  const generatedIds = new Set<number>();
+
+  for (let i = 0; i < 10; i++) {
+    const randomId = generateRandomId();
+
+    expect(generatedIds.has(randomId)).toBe(false);
+    generatedIds.add(randomId);
+  }
+});
+
+test('generateRandomId ожидаем ошибку при попытке генерации нового id', () => {
+  const generateAllIds = createUniqueIdGenerator(1, 3);
+
+  for (let i = 1; i <= 3; i++) {
+    generateAllIds();
+  }
+  expect(() => generateAllIds()).toThrowError(
+    'Исчерпаны все доступные id в заданном диапазоне'
+  );
+});
+
+test('generateRandomId ожидаем ошибку при создании генератора с некорректным диапазоном', () => {
+  expect(() => createUniqueIdGenerator(50, 3)).toThrowError(
+    'Некорректный диапазон чисел'
+  );
 });
