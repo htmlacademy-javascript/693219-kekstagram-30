@@ -8,8 +8,8 @@ const generateRandomId = createUniqueIdGenerator(1, 1000);
 interface Comment {
   id: number;
   avatar: string;
-  message: string | undefined;
-  name: string | undefined;
+  message: string;
+  name: string;
 }
 
 interface Photo {

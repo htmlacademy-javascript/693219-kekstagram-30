@@ -12,7 +12,7 @@ const getRandomNumber = (min: number, max: number): number =>
  * @param Исходный массив.
  * @returns Случайная элемент из массива.
  */
-const getRandomElement = <T>(array: T[]): T | undefined =>
+const getRandomElement = <T>(array: T[]): T =>
   array[getRandomNumber(0, array.length - 1)];
 
 /**
