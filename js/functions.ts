@@ -6,7 +6,7 @@ enum myDefault {
  * @description Функция для проверки длины строки.
  * @param inputString - Входная строка для проверки.
  * @param maxLength - Максимальная длина (по умолчанию - 140).
- * @returns {boolean} - Возвращает true, если строка не превышает максимальную длину, иначе false.
+ * @returns - Возвращает true, если строка не превышает максимальную длину, иначе false.
  */
 const checkStringLength = (
   inputString: string,
@@ -16,7 +16,7 @@ const checkStringLength = (
 /**
  * @description Функция для проверки, является ли строка палиндромом.
  * @param inputString - Входная строка для проверки.
- * @returns {boolean} - Возвращает true, если строка является палиндромом, иначе false.
+ * @returns - Возвращает true, если строка является палиндромом, иначе false.
  */
 const isPalindrome = (inputString: string): boolean => {
   const cleanedString = inputString.toLowerCase().replace(/\s/g, '');
@@ -26,7 +26,7 @@ const isPalindrome = (inputString: string): boolean => {
 /**
  * @description Функция принимает строку, извлекает содержащиеся в ней цифры от 0 до 9 и возвращает их в виде целого положительного числа.
  * @param input - Входная строка или число для извлечения цифр.
- * @returns {number} - Возвращает извлеченные цифры в виде целого положительного числа. Если цифр нет, возвращает NaN.
+ * @returns - Возвращает извлеченные цифры в виде целого положительного числа. Если цифр нет, возвращает NaN.
  */
 const extractAndSumDigits = (input: string | number): number => {
   if (typeof input === 'number') {
@@ -44,11 +44,11 @@ const extractAndSumDigits = (input: string | number): number => {
 
 /**
  * Проверяет, укладывается ли встреча в рамки рабочего дня.
- * @param {string} startWorkDay - Время начала рабочего дня в формате 'часы:минуты'.
- * @param {string} endWorkDay - Время конца рабочего дня в формате 'часы:минуты'.
- * @param {string} startMeeting - Время начала встречи в формате 'часы:минуты'.
- * @param {number} meetingDuration - Продолжительность встречи в минутах.
- * @returns {boolean} - Возвращает true, если встреча укладывается в рамки рабочего дня, иначе false.
+ * @param startWorkDay - Время начала рабочего дня в формате 'часы:минуты'.
+ * @param endWorkDay - Время конца рабочего дня в формате 'часы:минуты'.
+ * @param startMeeting - Время начала встречи в формате 'часы:минуты'.
+ * @param meetingDuration - Продолжительность встречи в минутах.
+ * @returns - Возвращает true, если встреча укладывается в рамки рабочего дня, иначе false.
  */
 function isMeetingWithinWorkingHours(
   startWorkDay: string,
