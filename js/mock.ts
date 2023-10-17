@@ -78,7 +78,7 @@ const createPhoto = (id: number): Photo => {
  * @param length - Длина массива фотографий (по умолчанию 25).
  * @returns Массив фотографий.
  */
-const generatePhotosArray = (length: number): PhotosArray =>
+const generatePhotosArray = (length: number = 25): PhotosArray =>
   Array.from({ length }, () => {
     console.log(length);
     return createPhoto(generateRandomPhotoId());
