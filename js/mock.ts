@@ -3,7 +3,8 @@ import {
   getRandomElement,
   createUniqueIdGenerator,
 } from './util';
-const generateRandomId = createUniqueIdGenerator(1, 1000);
+const generateRandomCommentId = createUniqueIdGenerator(1, 1000);
+const generateRandomPhotoId = createUniqueIdGenerator(1, 25);
 
 interface Comment {
   id: number;
@@ -12,7 +13,7 @@ interface Comment {
   name: string;
 }
 
-interface Photo {
+export interface Photo {
   id: number;
   url: string;
   description: string;
@@ -45,7 +46,7 @@ const sentences: string[] = [
  * @returns Объект комментария.
  */
 const createComment = (): Comment => ({
-  id: generateRandomId(),
+  id: generateRandomCommentId(),
   avatar: `img/avatar-${getRandomNumber(1, 6)}.svg`,
   message: getRandomElement(sentences),
   name: getRandomElement(names),
@@ -77,7 +78,10 @@ const createPhoto = (id: number): Photo => {
  * @param length - Длина массива фотографий (по умолчанию 25).
  * @returns Массив фотографий.
  */
-const generatePhotosArray = (length: number = 25): PhotosArray =>
-  Array.from({ length }, () => createPhoto(generateRandomId()));
+const generatePhotosArray = (length: number): PhotosArray =>
+  Array.from({ length }, () => {
+    console.log(length);
+    return createPhoto(generateRandomPhotoId());
+  });
 
 export { createComment, createPhoto, generatePhotosArray, names, sentences };
