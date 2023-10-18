@@ -80,7 +80,6 @@ const createPhoto = (id: number): Photo => {
  */
 const generatePhotosArray = (length: number = 25): PhotosArray =>
   Array.from({ length }, () => {
-    console.log(length);
     return createPhoto(generateRandomPhotoId());
   });
 

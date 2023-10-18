@@ -10,7 +10,7 @@ if (!picturesElement || !pictureFragment) {
   throw new Error('Не удалось найти элементы в DOM');
 }
 
-const similarPhotos: Photo[] = generatePhotosArray(22);
+const similarPhotos: Photo[] = generatePhotosArray(25);
 
 const picturesListFragment: DocumentFragment =
   document.createDocumentFragment();
