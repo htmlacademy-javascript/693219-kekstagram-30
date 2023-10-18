@@ -1,7 +1,7 @@
 import { generatePhotosArray } from './mock';
 import { Photo } from './mock';
 
-const picturesElement: HTMLElement | null = document.querySelector('.pictures');
+const picturesElement = document.querySelector<HTMLElement>('.pictures');
 const pictureFragment: HTMLTemplateElement | null =
   document.querySelector('#picture');
 
