@@ -15,9 +15,7 @@ const picturesListFragment: DocumentFragment =
   document.createDocumentFragment();
 
 similarPhotos.forEach(({ comments, description, likes, url }: Photo) => {
-  const pictureElement: HTMLElement = pictureFragment.content.cloneNode(
-    true
-  ) as HTMLElement;
+  const pictureElement = pictureFragment.content.cloneNode(true) as HTMLElement;
 
   if (!pictureElement) {
     throw new Error('Не удалось клонировать элемент');
