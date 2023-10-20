@@ -4,7 +4,7 @@ import { Photo } from './mock';
 const picturesElement = document.querySelector<HTMLElement>('.pictures');
 const pictureFragment = document
   .querySelector<HTMLTemplateElement>('#picture')
-  ?.content.querySelector<HTMLElement>('.picture');
+  ?.content.querySelector<HTMLAnchorElement>('.picture');
 
 if (!picturesElement || !pictureFragment) {
   throw new Error('Не удалось найти элементы в DOM');

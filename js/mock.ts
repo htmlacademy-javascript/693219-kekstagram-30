@@ -3,8 +3,6 @@ import {
   getRandomElement,
   createUniqueIdGenerator,
 } from './util';
-const generateRandomCommentId = createUniqueIdGenerator(1, 1000);
-const generateRandomPhotoId = createUniqueIdGenerator(1, 25);
 
 interface Comment {
   id: number;
@@ -45,8 +43,8 @@ const sentences: string[] = [
  * Создает комментарий с случайными данными.
  * @returns Объект комментария.
  */
-const createComment = (): Comment => ({
-  id: generateRandomCommentId(),
+const createComment = (id: number): Comment => ({
+  id,
   avatar: `img/avatar-${getRandomNumber(1, 6)}.svg`,
   message: getRandomElement(sentences),
   name: getRandomElement(names),
@@ -57,11 +55,11 @@ const createComment = (): Comment => ({
  * @param id - Идентификатор фотографии.
  * @returns Объект фотографии.
  */
-const createPhoto = (id: number): Photo => {
+const createPhoto = (id: number, mockComment: () => Comment): Photo => {
   const commentsCount: number = getRandomNumber(0, 30);
   const comments: Comment[] = Array.from(
     { length: commentsCount },
-    createComment
+    mockComment
   );
 
   return {
@@ -78,9 +76,15 @@ const createPhoto = (id: number): Photo => {
  * @param length - Длина массива фотографий (по умолчанию 25).
  * @returns Массив фотографий.
  */
-const generatePhotosArray = (length: number = 25): PhotosArray =>
-  Array.from({ length }, () => {
-    return createPhoto(generateRandomPhotoId());
+const generatePhotosArray = (length: number = 25): PhotosArray => {
+  const generateRandomPhotoId = createUniqueIdGenerator(1, length);
+  const generateRandomCommentId = createUniqueIdGenerator(1, 1000);
+
+  const mockComment = () => createComment(generateRandomCommentId());
+
+  return Array.from({ length }, () => {
+    return createPhoto(generateRandomPhotoId(), mockComment);
   });
+};
 
 export { createComment, createPhoto, generatePhotosArray, names, sentences };
