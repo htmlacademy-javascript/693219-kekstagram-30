@@ -33,20 +33,16 @@ function createUniqueIdGenerator(min: number, max: number): () => number {
     throw new Error('Некорректный диапазон чисел');
   }
 
-  return function (): number {
-    const availableIds: number[] = [];
-    for (let i = min; i <= max; i++) {
-      if (!usedIds.has(i)) {
-        availableIds.push(i);
-      }
-    }
-
-    if (availableIds.length === 0) {
+  return (): number => {
+    if (usedIds.size >= max - min + 1) {
       throw new Error('Исчерпаны все доступные id в заданном диапазоне');
     }
 
-    const randomIndex: number = getRandomNumber(0, availableIds.length - 1);
-    const randomId: number = availableIds[randomIndex];
+    let randomId: number = getRandomNumber(min, max);
+
+    while (usedIds.has(randomId)) {
+      randomId = getRandomNumber(min, max);
+    }
 
     usedIds.add(randomId);
 

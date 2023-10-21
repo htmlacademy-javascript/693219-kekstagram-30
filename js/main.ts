@@ -1,3 +1,1 @@
-import { generatePhotosArray } from './mock';
-
-generatePhotosArray();
+import './pictures.js';
