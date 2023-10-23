@@ -1,5 +1,6 @@
 import { generatePhotosArray } from './mock';
 import { Photo } from './mock';
+import { openPhoto } from './big-picture.js';
 
 const picturesElement = document.querySelector<HTMLElement>('.pictures');
 const pictureFragment = document
@@ -30,3 +31,9 @@ similarPhotos.forEach(({ comments, description, likes, url }: Photo) => {
 });
 
 picturesElement?.appendChild(picturesListFragment);
+
+const photos = document.querySelectorAll('a.picture');
+
+photos.forEach((el) => {
+  el.addEventListener('click', openPhoto);
+});

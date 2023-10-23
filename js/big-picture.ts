@@ -1,7 +1,6 @@
+import { Photo } from './mock';
+
 const photoElement = document.querySelector<HTMLElement>('.big-picture');
-const picturesContainer = document.querySelector<HTMLElement>(
-  '.pictures.container'
-);
 const photoCloseElement = document.querySelector<HTMLButtonElement>(
   '.big-picture__cancel'
 );
@@ -14,8 +13,10 @@ const onDocumentKeydown = (evt: KeyboardEvent) => {
   }
 };
 
-const openPhoto = (event: Event) => {
+const openPhoto = (event: Event, photo: Photo) => {
+  console.log(photo);
   const target = event.target as HTMLInputElement;
+
   if (target.matches('.picture__img')) {
     photoElement?.classList.remove('hidden');
   }
@@ -28,5 +29,6 @@ const closePhoto = () => {
   document.removeEventListener('keydown', onDocumentKeydown);
 };
 
-picturesContainer?.addEventListener('click', openPhoto);
 photoCloseElement?.addEventListener('click', closePhoto);
+
+export { openPhoto };
