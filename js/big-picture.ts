@@ -1,42 +1,32 @@
-// Заведите модуль, который будет отвечать за отрисовку окна с полноразмерным изображением.
+const photoElement = document.querySelector<HTMLElement>('.big-picture');
+const picturesContainer = document.querySelector<HTMLElement>(
+  '.pictures.container'
+);
+const photoCloseElement = document.querySelector<HTMLButtonElement>(
+  '.big-picture__cancel'
+);
 
-// Окно должно открываться при клике на миниатюру. Данные для окна (изображение, комментарии, лайки и так далее) берите из того же объекта, который использовался для отрисовки соответствующей миниатюры.
+const onDocumentKeydown = (evt: KeyboardEvent) => {
+  if (evt.key === 'Escape') {
+    evt.preventDefault();
+    // eslint-disable-next-line
+    closePhoto();
+  }
+};
 
-// Для отображения окна нужно удалять класс hidden у элемента .big-picture и каждый раз заполнять его данными о конкретной фотографии:
+const openPhoto = (event: Event) => {
+  const target = event.target as HTMLInputElement;
+  if (target.matches('.picture__img')) {
+    photoElement?.classList.remove('hidden');
+  }
 
-// Адрес изображения url подставьте как src изображения внутри блока .big-picture__img.
+  document.addEventListener('keydown', onDocumentKeydown);
+};
 
-// Количество лайков likes подставьте как текстовое содержание элемента .likes-count.
+const closePhoto = () => {
+  photoElement?.classList.add('hidden');
+  document.removeEventListener('keydown', onDocumentKeydown);
+};
 
-// Количество показанных комментариев подставьте как текстовое содержание элемента .social__comment-shown-count.
-
-// Общее количество комментариев к фотографии comments подставьте как текстовое содержание элемента .social__comment-total-count.
-
-// Список комментариев под фотографией: комментарии должны вставляться в блок .social__comments. Разметка каждого комментария должна выглядеть так:
-
-// <li class="social__comment">
-//   <img
-//     class="social__picture"
-//     src="{{аватар}}"
-//     alt="{{имя комментатора}}"
-//     width="35" height="35">
-//   <p class="social__text">{{текст комментария}}</p>
-// </li>
-
-//         Копировать
-
-// Описание фотографии description вставьте строкой в блок .social__caption.
-
-// После открытия окна спрячьте блоки счётчика комментариев .social__comment-count и загрузки новых комментариев .comments-loader, добавив им класс hidden, с ними мы разберёмся позже, в другом домашнем задании.
-
-// После открытия окна добавьте тегу <body> класс modal-open, чтобы контейнер с фотографиями позади не прокручивался при скролле. При закрытии окна не забудьте удалить этот класс.
-
-// Напишите код для закрытия окна по нажатию клавиши Esc и клике по иконке закрытия.
-
-// Подключите модуль в проект.
-
-// Как связать модули миниатюр и полноразмерного режима?
-// Задача не имеет одного верного решения, поэтому будет правильным как использование третьего модуля для связки двух других,
-//  так и импорт модуля полноразмерных изображений в модуль миниатюр и дальнейшая работа с интерфейсом этого модуля, addEventListener и замыканиями.
-// Последнее решение похоже на демонстрацию по учебному проекту. А первое — с третьим модулем — более сложное из-за отсутствия примера, но самостоятельное.
-// В качестве третьего модуля можно выбрать точку входа, а можно завести отдельный модуль, например «Галерея». Решение за вами.
+picturesContainer?.addEventListener('click', openPhoto);
+photoCloseElement?.addEventListener('click', closePhoto);
