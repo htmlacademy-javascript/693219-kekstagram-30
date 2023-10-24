@@ -72,6 +72,13 @@ const openPhoto = (photo: Photo) => {
 
   // Описание фотографии.
   getElement('.social__caption', photoElement).textContent = photo.description;
+
+  // После открытия окна спрячьте блоки счётчика комментариев .social__comment-count и загрузки новых комментариев .comments-loader, добавив им класс hidden, с ними мы разберёмся позже, в другом домашнем задании.
+  getElement('.social__comment-count').classList.add('hidden');
+  getElement('.comments-loader').classList.add('hidden');
+
+  // Отключаем тегу <body> прокрутку при скролле
+  document.body.classList.add('modal-open');
 };
 
 /**
@@ -82,6 +89,9 @@ const closePhoto = () => {
 
   photoElement?.classList.add('hidden');
   document.removeEventListener('keydown', onDocumentKeydown);
+
+  // Включаем тегу <body> прокрутку при скролле
+  document.body.classList.remove('modal-open');
 };
 
 export { openPhoto, closePhoto };
