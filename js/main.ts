@@ -1,2 +1,3 @@
-import './pictures.js';
-import './big-picture.js';
+import { renderPhoto } from './render-photo.js';
+
+renderPhoto(25);

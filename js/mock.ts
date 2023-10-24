@@ -4,7 +4,7 @@ import {
   createUniqueIdGenerator,
 } from './util';
 
-interface Comment {
+export interface Comment {
   id: number;
   avatar: string;
   message: string;

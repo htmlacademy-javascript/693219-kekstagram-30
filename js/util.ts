@@ -50,4 +50,20 @@ function createUniqueIdGenerator(min: number, max: number): () => number {
   };
 }
 
-export { getRandomNumber, getRandomElement, createUniqueIdGenerator };
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const getElement = (selector: string, target: any = document) => {
+  const element = target.querySelector(selector);
+  if (!element) {
+    throw new Error(
+      `Element with selector '${selector}' not found target ${target}`
+    );
+  }
+  return element;
+};
+
+export {
+  getRandomNumber,
+  getRandomElement,
+  createUniqueIdGenerator,
+  getElement,
+};
