@@ -50,4 +50,22 @@ function createUniqueIdGenerator(min: number, max: number): () => number {
   };
 }
 
-export { getRandomNumber, getRandomElement, createUniqueIdGenerator };
+const getElement = <E extends Element = HTMLDivElement>(
+  selector: string,
+  target: HTMLElement | Document = document
+) => {
+  const element = target.querySelector<E>(selector);
+  if (!element) {
+    throw new Error(
+      `Element with selector '${selector}' not found target ${target}`
+    );
+  }
+  return element;
+};
+
+export {
+  getRandomNumber,
+  getRandomElement,
+  createUniqueIdGenerator,
+  getElement,
+};

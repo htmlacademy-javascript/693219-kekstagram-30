@@ -4,7 +4,7 @@ import {
   createUniqueIdGenerator,
 } from './util';
 
-interface Comment {
+export interface Comment {
   id: number;
   avatar: string;
   message: string;
@@ -18,8 +18,6 @@ export interface Photo {
   likes: number;
   comments: Comment[];
 }
-
-type PhotosArray = Photo[];
 
 const names: string[] = [
   'Алексей',
@@ -76,15 +74,15 @@ const createPhoto = (id: number, mockComment: () => Comment): Photo => {
  * @param length - Длина массива фотографий (по умолчанию 25).
  * @returns Массив фотографий.
  */
-const generatePhotosArray = (length: number = 25): PhotosArray => {
+const generatePhotosArray = (length: number = 25): Photo[] => {
   const generateRandomPhotoId = createUniqueIdGenerator(1, length);
   const generateRandomCommentId = createUniqueIdGenerator(1, 1000);
 
   const mockComment = () => createComment(generateRandomCommentId());
 
-  return Array.from({ length }, () => {
-    return createPhoto(generateRandomPhotoId(), mockComment);
-  });
+  return Array.from({ length }, () =>
+    createPhoto(generateRandomPhotoId(), mockComment)
+  );
 };
 
 export { createComment, createPhoto, generatePhotosArray, names, sentences };
