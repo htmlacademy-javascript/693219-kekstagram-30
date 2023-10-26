@@ -37,10 +37,6 @@ const sentences: string[] = [
   'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!',
 ];
 
-/**
- * Создает комментарий с случайными данными.
- * @returns Объект комментария.
- */
 const createComment = (id: number): Comment => ({
   id,
   avatar: `img/avatar-${getRandomNumber(1, 6)}.svg`,
@@ -48,11 +44,6 @@ const createComment = (id: number): Comment => ({
   name: getRandomElement(names),
 });
 
-/**
- * Создает фотографию с случайными данными.
- * @param id - Идентификатор фотографии.
- * @returns Объект фотографии.
- */
 const createPhoto = (id: number, mockComment: () => Comment): Photo => {
   const commentsCount: number = getRandomNumber(0, 30);
   const comments: Comment[] = Array.from(
@@ -69,11 +60,6 @@ const createPhoto = (id: number, mockComment: () => Comment): Photo => {
   };
 };
 
-/**
- * Генерирует массив фотографий с случайными данными.
- * @param length - Длина массива фотографий (по умолчанию 25).
- * @returns Массив фотографий.
- */
 const generatePhotosArray = (length: number = 25): Photo[] => {
   const generateRandomPhotoId = createUniqueIdGenerator(1, length);
   const generateRandomCommentId = createUniqueIdGenerator(1, 1000);
