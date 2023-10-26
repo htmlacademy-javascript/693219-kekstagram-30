@@ -3,17 +3,17 @@ import { openPhoto, closePhoto } from './big-picture.js';
 import { getElement } from './util.js';
 
 const picturesElement = getElement('.pictures');
-const pictureFragmentElement = getElement('#picture').content;
-const pictureFragment = getElement('.picture', pictureFragmentElement);
+const pictureFragment =
+  getElement<HTMLTemplateElement>('#picture').content.firstElementChild!;
 const photoCloseElement = getElement('.big-picture__cancel');
 
 /**
  * Функция для генерациия фотографий на сайте
- * @param i - Количество фотографий которые нужно сгененрировать
+ * @param amount - Количество фотографий которые нужно сгененрировать
  */
-const renderPhoto = (i: number) => {
+const renderPhoto = (amount: number) => {
   // Создаем фейк данные
-  const mockPhotos: Photo[] = generatePhotosArray(i);
+  const mockPhotos = generatePhotosArray(amount);
 
   // Создаем миниаютюры для фейк данных
   mockPhotos.forEach((photo: Photo) => {
@@ -23,8 +23,9 @@ const renderPhoto = (i: number) => {
     const pictureElement = pictureFragment.cloneNode(true) as HTMLElement;
 
     // Добавляем в него фейк данные
-    getElement('.picture__img', pictureElement).src = url;
-    getElement('.picture__img', pictureElement).alt = description;
+    const image = getElement<HTMLImageElement>('.picture__img', pictureElement);
+    image.src = url;
+    image.alt = description;
     getElement('.picture__likes', pictureElement).textContent =
       likes.toString();
     getElement('.picture__comments', pictureElement).textContent =
