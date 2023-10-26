@@ -2,6 +2,8 @@ import { photoElement } from './big-picture';
 import { Comment } from './mock';
 import { getElement } from './util';
 
+const socialCommentsElement = getElement<HTMLUListElement>('.social__comments');
+
 const createComment = (comment: Comment): HTMLElement => {
   const commentElement: HTMLLIElement = document.createElement('li');
   commentElement.className = 'social__comment';
@@ -23,19 +25,36 @@ const createComment = (comment: Comment): HTMLElement => {
   return commentElement;
 };
 
+const addComments = (comments: Comment[]) => {
+  let newComments = comments;
+
+  return () => {
+    if (newComments.length <= 5) {
+      getElement('.social__comments-loader').classList.add('hidden');
+    }
+
+    newComments.slice(0, 5).forEach((comment) => {
+      const newCommentElement = createComment(comment);
+      socialCommentsElement.appendChild(newCommentElement);
+    });
+    newComments = newComments.slice(5);
+  };
+};
+
 const renderComments = (comments: Comment[]) => {
-  const socialCommentsElement =
-    getElement<HTMLUListElement>('.social__comments');
+  const commentsLoader = getElement('.social__comments-loader');
+
   getElement('.social__comment-shown-count', photoElement).textContent =
     comments.length.toString();
   getElement('.social__comment-total-count', photoElement).textContent =
     comments.length.toString();
   socialCommentsElement.innerHTML = '';
 
-  comments.forEach((comment) => {
-    const newCommentElement = createComment(comment);
-    socialCommentsElement.appendChild(newCommentElement);
-  });
+  const addNewComment = addComments(comments);
+  commentsLoader.classList.remove('hidden');
+
+  addNewComment();
+  commentsLoader.addEventListener('click', addNewComment);
 };
 
 export { renderComments };
