@@ -38,14 +38,15 @@ const addComments = (comments: Comment[]) => {
       socialCommentsElement.appendChild(newCommentElement);
     });
     newComments = newComments.slice(5);
+
+    getElement('.social__comment-shown-count', photoElement).textContent =
+      document.querySelectorAll('.social__comment').length.toString();
   };
 };
 
 const renderComments = (comments: Comment[]) => {
   const commentsLoader = getElement('.social__comments-loader');
 
-  getElement('.social__comment-shown-count', photoElement).textContent =
-    comments.length.toString();
   getElement('.social__comment-total-count', photoElement).textContent =
     comments.length.toString();
   socialCommentsElement.innerHTML = '';
