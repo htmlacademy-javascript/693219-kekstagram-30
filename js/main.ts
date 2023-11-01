@@ -1,3 +1,4 @@
 import { renderPhoto } from './render-photo.js';
+import { generatePhotosArray } from './mock.js';
 
-renderPhoto(25);
+renderPhoto(generatePhotosArray(25));
