@@ -1,4 +1,4 @@
-import { generatePhotosArray, Photo } from './mock.js';
+import { Photo } from './mock.js';
 import { openPhoto, closePhoto } from './big-picture.js';
 import { getElement } from './util.js';
 
@@ -7,9 +7,8 @@ const pictureFragment =
   getElement<HTMLTemplateElement>('#picture').content.firstElementChild!;
 const photoCloseElement = getElement('.big-picture__cancel');
 
-const renderPhoto = (amount: number) => {
-  const mockPhotos = generatePhotosArray(amount);
-  mockPhotos.forEach((photo: Photo) => {
+const renderPhoto = (photos: Photo[]) => {
+  photos.forEach((photo: Photo) => {
     const { comments, description, likes, url } = photo;
     const pictureElement = pictureFragment.cloneNode(true) as HTMLElement;
     const image = getElement<HTMLImageElement>('.picture__img', pictureElement);
