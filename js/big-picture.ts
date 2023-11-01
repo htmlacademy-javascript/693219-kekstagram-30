@@ -34,4 +34,4 @@ function closePhoto() {
   document.removeEventListener('keydown', onDocumentKeydown);
 }
 
-export { openPhoto, closePhoto, photoElement };
+export { openPhoto, closePhoto };

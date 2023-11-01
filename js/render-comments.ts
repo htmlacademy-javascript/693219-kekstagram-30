@@ -1,11 +1,11 @@
-import { photoElement } from './big-picture';
 import { Comment } from './mock';
 import { getElement } from './util';
 
-const PACK_SIZE = 3;
+const PACK_SIZE = 5;
 
 const list = getElement<HTMLUListElement>('.social__comments');
 const loaderButton = getElement('.social__comments-loader');
+const photoElement = getElement('.big-picture');
 const totalCount = getElement('.social__comment-total-count', photoElement);
 const shownCount = getElement('.social__comment-shown-count', photoElement);
 let allComments: Comment[] = [];
@@ -34,10 +34,8 @@ const createComment = (comment: Comment): HTMLElement => {
 const loadNextComments = () => {
   const currentShowedAmount = list.childElementCount;
   let nextShowedAmount = currentShowedAmount + PACK_SIZE;
-  nextShowedAmount =
-    nextShowedAmount > allComments.length
-      ? allComments.length
-      : nextShowedAmount;
+  const isAllWillBeShown = nextShowedAmount >= allComments.length;
+  nextShowedAmount = isAllWillBeShown ? allComments.length : nextShowedAmount;
   const commentToRender = allComments.slice(
     currentShowedAmount,
     nextShowedAmount
@@ -48,12 +46,12 @@ const loadNextComments = () => {
     list.appendChild(newCommentElement);
   });
 
+  shownCount.textContent = nextShowedAmount.toString();
+
   loaderButton.classList.toggle(
     'hidden',
     nextShowedAmount >= allComments.length
   );
-
-  // document.querySelectorAll('.social__comment').length.toString();
 };
 
 loaderButton.addEventListener('click', loadNextComments);
