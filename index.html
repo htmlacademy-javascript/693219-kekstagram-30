@@ -56,6 +56,9 @@
               class="img-upload__form"
               id="upload-select-image"
               autocomplete="off"
+              method="post"
+              enctype="multipart/form-data"
+              action="https://30.javascript.pages.academy/kekstagram"
             >
               <!-- Изначальное состояние поля для загрузки изображения -->
               <fieldset class="img-upload__start">
@@ -245,6 +248,8 @@
                         class="text__description"
                         name="description"
                         placeholder="Ваш комментарий..."
+                        required
+                        maxlength="140"
                       ></textarea>
                     </div>
                   </fieldset>
@@ -452,6 +457,7 @@
       </section>
     </template>
 
+    <script src="./vendor/pristine/pristine.min.js"></script>
     <script src="./js/main.ts" type="module"></script>
   </body>
 </html>
