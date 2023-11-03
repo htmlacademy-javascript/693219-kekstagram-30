@@ -4,6 +4,7 @@ const imageInput = getElement<HTMLInputElement>('.img-upload__input');
 const imageUpload = getElement<HTMLElement>('.img-upload__overlay');
 const closeImageButton = getElement<HTMLButtonElement>('.img-upload__cancel');
 const form = getElement<HTMLFormElement>('.img-upload__form');
+const textHashtags = form.querySelector<HTMLInputElement>('.text__hashtags');
 
 const toggleClasses = (isOpen: boolean = true) => {
   imageUpload.classList.toggle('hidden', !isOpen);
@@ -36,13 +37,13 @@ const pristine = new Pristine(form, {
 });
 
 pristine.addValidator(
-  form.querySelector('.text__description'),
+  textHashtags,
   (value: string) => value.length < 140,
   'Длина комментария больше 140 символов'
 );
 
 pristine.addValidator(
-  form.querySelector('.text__hashtags'),
+  textHashtags,
   (value: string) => {
     const hashtags = value.trim().split(' ');
     return hashtags.length - 1 < 5;
@@ -51,7 +52,7 @@ pristine.addValidator(
 );
 
 pristine.addValidator(
-  form.querySelector('.text__hashtags'),
+  textHashtags,
   (value: string) => {
     const hashtags = value.trim().split(' ');
     const regexPattern = /^#(?=.*[^0-9])[a-zа-яё0-9]{1,29}$/i;
