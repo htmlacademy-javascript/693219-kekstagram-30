@@ -29,6 +29,7 @@ pristine.addValidator(
   textHashtags,
   (value: string) => {
     const hashtags = value.trim().split(' ');
+    console.log(hashtags);
     const regexPattern = /^#(?=.*[^0-9])[a-zа-яё0-9]{1,29}$/i;
 
     for (const element of hashtags) {
@@ -52,7 +53,7 @@ pristine.addValidator(
 );
 
 form.addEventListener('submit', (evt) => {
-  evt.preventDefault();
-
-  pristine.validate();
+  if (!pristine.validate()) {
+    evt.preventDefault();
+  }
 });
