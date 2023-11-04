@@ -54,13 +54,13 @@ const loadNextComments = () => {
   );
 };
 
-loaderButton.addEventListener('click', loadNextComments);
-
 const renderComments = (comments: Comment[]) => {
   allComments = comments;
   totalCount.textContent = comments.length.toString();
   list.innerHTML = '';
   loadNextComments();
 };
+
+loaderButton.addEventListener('click', loadNextComments);
 
 export { renderComments };

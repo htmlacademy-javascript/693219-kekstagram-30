@@ -1,3 +1,4 @@
+import Pristine from 'pristinejs';
 import { getElement } from './util';
 
 const form = getElement<HTMLFormElement>('.img-upload__form');
@@ -29,8 +30,11 @@ pristine.addValidator(
   textHashtags,
   (value: string) => {
     const hashtags = value.trim().split(' ');
-    console.log(hashtags);
     const regexPattern = /^#(?=.*[^0-9])[a-zа-яё0-9]{1,29}$/i;
+
+    if (hashtags[0] === '') {
+      return true;
+    }
 
     for (const element of hashtags) {
       if (!regexPattern.test(element)) {

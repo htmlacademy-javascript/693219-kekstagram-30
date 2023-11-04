@@ -21,7 +21,12 @@ const onCloseImageUpload = () => {
 };
 
 function onDocumentKeydown(evt: KeyboardEvent) {
-  if (evt.key === 'Escape') {
+  const isForm =
+    document.activeElement === getElement('.text__hashtags') ||
+    document.activeElement === getElement('.text__description');
+
+  // console.log(isForm);
+  if (evt.key === 'Escape' && !isForm) {
     evt.preventDefault();
     onCloseImageUpload();
   }
