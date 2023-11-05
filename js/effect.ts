@@ -1,4 +1,5 @@
 import { getElement } from './util';
+import { updateSlider } from './slider';
 
 const img = getElement('.img-upload__preview img');
 const list = getElement('.effects__list');
@@ -31,6 +32,8 @@ list.addEventListener('change', (evt) => {
 
   const target = evt.target as HTMLInputElement;
   const val: string = target.value;
+
+  updateSlider(val);
 
   if (val in data) {
     img.style.filter = data[val];
