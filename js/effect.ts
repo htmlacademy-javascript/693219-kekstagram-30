@@ -3,58 +3,43 @@ import { getElement } from './util';
 const img = getElement('.img-upload__preview img');
 const list = getElement('.effects__list');
 
-const data = {
-  none: '',
-  sepia: 'grayscale(1)',
+type data = {
+  [key: string]: string;
+  none: string;
+  chrome: string;
+  sepia: string;
+  marvin: string;
+  phobos: string;
+  heat: string;
+};
+
+const sliderElement = getElement('.img-upload__effect-level');
+
+const toggleClass = (isHidden: boolean = false) => {
+  sliderElement.classList.toggle('hidden', isHidden);
 };
 
 list.addEventListener('change', (evt) => {
-  const a = evt.target!.getAttribute('value');
-  console.log(a, data, data['a']);
+  const data: data = {
+    none: '',
+    chrome: 'grayscale(1)',
+    sepia: 'sepia(1)',
+    marvin: 'invert(100%)',
+    phobos: 'blur(3px)',
+    heat: 'brightness(3)',
+  };
 
-  img.style.filter = data[a];
+  const target = evt.target as HTMLInputElement;
+  const val: string = target.value;
+
+  if (val in data) {
+    img.style.filter = data[val];
+  } else {
+    throw new Error(`Некорректное значение фильтра:${val}`);
+  }
+
+  toggleClass(true);
+  if (val !== 'none') {
+    toggleClass();
+  }
 });
-
-// const effectNone = getElement('[for="effect-none"]');
-// const effectChrome = getElement('[for="effect-chrome"]');
-// const effectSepia = getElement('[for="effect-sepia"]');
-// const effectMarvin = getElement('[for="effect-marvin"]');
-// const effectPhobos = getElement('[for="effect-phobos"]');
-// const effectHeat = getElement('[for="effect-heat"]');
-// const sliderElement = getElement('.img-upload__effect-level');
-
-// const toggleClass = (isHidden: boolean = false) => {
-//   sliderElement.classList.toggle('hidden', isHidden);
-// };
-
-// toggleClass(true);
-
-// effectNone.addEventListener('click', () => {
-//   img.style.filter = '';
-//   toggleClass(true);
-// });
-
-// effectChrome.addEventListener('click', () => {
-//   img.style.filter = 'grayscale(1)';
-//   toggleClass(false);
-// });
-
-// effectSepia.addEventListener('click', () => {
-//   img.style.filter = 'sepia(1)';
-//   toggleClass(false);
-// });
-
-// effectMarvin.addEventListener('click', () => {
-//   img.style.filter = 'invert(100%)';
-//   toggleClass(false);
-// });
-
-// effectPhobos.addEventListener('click', () => {
-//   img.style.filter = 'blur(3px)';
-//   toggleClass(false);
-// });
-
-// effectHeat.addEventListener('click', () => {
-//   img.style.filter = 'brightness(3)';
-//   toggleClass(false);
-// });
