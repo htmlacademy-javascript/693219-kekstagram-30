@@ -2,7 +2,7 @@ import Pristine from 'pristinejs';
 import { getElement } from './util';
 
 const form = getElement<HTMLFormElement>('.img-upload__form');
-const textHashtags = form.querySelector<HTMLInputElement>('.text__hashtags');
+const textHashtags = getElement<HTMLInputElement>('.text__hashtags');
 
 const pristine = new Pristine(form, {
   classTo: 'img-upload__field-wrapper',
