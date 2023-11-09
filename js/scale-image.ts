@@ -9,8 +9,7 @@ const scaleBiggerButton = getElement('.scale__control--bigger');
 const scaleValueInput = getElement<HTMLInputElement>('.scale__control--value');
 const img = getElement<HTMLImageElement>('.img-upload__preview img');
 
-const getValue = (): number =>
-  Number(scaleValueInput.getAttribute('value')?.slice(0, -1));
+const getValue = (): number => parseInt(scaleValueInput.value, 10);
 
 const changeImage = (value: number) => {
   scaleValueInput.setAttribute('value', `${value}%`);
@@ -19,22 +18,19 @@ const changeImage = (value: number) => {
 
 const onScaleSmallerButton = () => {
   const value = getValue();
+  let nextValue = value - STEP;
+  nextValue = nextValue < MIN_VALUE ? MIN_VALUE : nextValue;
 
-  if (value - STEP <= MIN_VALUE) {
-    changeImage(MIN_VALUE);
-  } else {
-    changeImage(value - STEP);
-  }
+  changeImage(nextValue);
 };
 
 const onScaleBiggerButton = () => {
   const value = getValue();
 
-  if (value + STEP >= MAX_VALUE) {
-    changeImage(MAX_VALUE);
-  } else {
-    changeImage(value + STEP);
-  }
+  let nextValue = value + STEP;
+  nextValue = nextValue > MAX_VALUE ? MAX_VALUE : nextValue;
+
+  changeImage(nextValue);
 };
 
 scaleSmallerButton.addEventListener('click', onScaleSmallerButton);

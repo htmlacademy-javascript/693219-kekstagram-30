@@ -1,10 +1,10 @@
 import { getElement } from './util';
-import noUiSlider from 'noUiSlider';
+import noUiSlider from 'nouislider';
+import 'nouislider/dist/nouislider.css';
 
-const sliderElement = getElement('.effect-level__slider') as HTMLElement &
-  noUiSlider.Instance;
+const sliderElement = getElement('.effect-level__slider');
 
-noUiSlider.create(sliderElement, {
+const slider = noUiSlider.create(sliderElement, {
   range: {
     min: 0,
     max: 1,
@@ -13,9 +13,9 @@ noUiSlider.create(sliderElement, {
   start: 0,
 });
 
-// sliderElement.noUiSlider.on('update', () => {
-//   console.log(sliderElement.noUiSlider.get());
-// });
+slider.on('update', () => {
+  console.log(slider.get());
+});
 
 const updateSlider = (value: string) => {
   // Для эффекта «Хром» — filter: grayscale(0..1) с шагом 0.1;
