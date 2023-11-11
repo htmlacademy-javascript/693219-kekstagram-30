@@ -1,5 +1,9 @@
+import './form.js';
+import './validate-form.js';
+import './scale-image.js';
+import './slider.js';
+
 import { renderPhoto } from './render-photo.js';
 import { generatePhotosArray } from './mock.js';
-import './form.js';
 
 renderPhoto(generatePhotosArray(25));
