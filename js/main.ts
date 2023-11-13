@@ -4,6 +4,9 @@ import './scale-image.js';
 import './slider.js';
 
 import { renderPhoto } from './render-photo.js';
-import { generatePhotosArray } from './mock.js';
+import { loadImages } from './load.js';
 
-renderPhoto(generatePhotosArray(25));
+const images = await loadImages();
+
+
+renderPhoto(images);
