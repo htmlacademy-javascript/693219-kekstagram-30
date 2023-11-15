@@ -1,7 +1,5 @@
-
 const FROM_ZERO_TO_ONE = createSliderData(0, 1, 0.1);
 const FROM_ZERO_TO_HUNDRED = createSliderData(0, 100);
-
 
 export const EFFECT_OPTION_MAP = {
   none: {
@@ -41,6 +39,6 @@ function createSliderData(min = 0, max = 100, step = 1, start = max) {
     },
     start,
     step,
-    connect: 'lower',
+    connect: "lower",
   };
 }

@@ -12,8 +12,7 @@ const getRandomNumber = (min, max) =>
  * @param Исходный массив.
  * @returns Случайная элемент из массива.
  */
-const getRandomElement = (array)=>
-  array[getRandomNumber(0, array.length - 1)];
+const getRandomElement = (array) => array[getRandomNumber(0, array.length - 1)];
 
 /**
  * Создает генератор уникальных идентификаторов в заданном диапазоне чисел.
@@ -30,12 +29,12 @@ function createUniqueIdGenerator(min, max) {
   const usedIds = new Set();
 
   if (min > max) {
-    throw new Error('Некорректный диапазон чисел');
+    throw new Error("Некорректный диапазон чисел");
   }
 
   return () => {
     if (usedIds.size >= max - min + 1) {
-      throw new Error('Исчерпаны все доступные id в заданном диапазоне');
+      throw new Error("Исчерпаны все доступные id в заданном диапазоне");
     }
 
     let randomId = getRandomNumber(min, max);
@@ -50,10 +49,7 @@ function createUniqueIdGenerator(min, max) {
   };
 }
 
-const getElement = (
-  selector,
-  target = document
-) => {
+const getElement = (selector, target = document) => {
   const element = target.querySelector(selector);
   if (!element) {
     throw new Error(
