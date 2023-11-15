@@ -4,9 +4,9 @@ import './scale-image.js';
 import './slider.js';
 
 import { renderPhoto } from './render-photo.js';
-import { loadImages } from './load.js';
+import { getData } from './api.js';
+import { Photo } from './mock.js';
 
-const images = await loadImages();
-
+const images = await getData() as Photo[];
 
 renderPhoto(images);

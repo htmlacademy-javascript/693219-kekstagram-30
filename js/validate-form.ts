@@ -1,5 +1,6 @@
 import Pristine from 'pristinejs';
 import { getElement } from './util';
+import { sendData } from './api';
 
 const form = getElement<HTMLFormElement>('.img-upload__form');
 const textHashtags = getElement<HTMLInputElement>('.text__hashtags');
@@ -59,5 +60,8 @@ pristine.addValidator(
 form.addEventListener('submit', (evt) => {
   if (!pristine.validate()) {
     evt.preventDefault();
+    const data = new FormData(evt.target);
+
+    sendData(data);
   }
 });
