@@ -12,6 +12,22 @@ const ErrorText = {
   SEND_DATA: 'Не удалось отправить форму. Попробуйте ещё раз',
 };
 
+const showAlert = (errorText) => {
+  console.log(1)
+  const errorFragment =
+  document.querySelector('#data-error').content.firstElementChild;
+
+  const errorElement = errorFragment.cloneNode(true);
+  const errorTitle = errorElement.querySelector('.data-error__title');
+
+  errorTitle.textContent = errorText;
+  document.body.appendChild(errorElement);
+
+  setInterval(() => {
+    errorElement.remove();
+  }, 5000);
+};
+
 const load = (route, errorText, method = Method.GET, body = null) =>
   fetch(`${BASE_URL}${route}`, {method, body})
     .then((response) => {
@@ -21,6 +37,7 @@ const load = (route, errorText, method = Method.GET, body = null) =>
       return response.json();
     })
     .catch(() => {
+      showAlert(errorText)
       throw new Error(errorText);
     });
 
