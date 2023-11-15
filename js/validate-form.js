@@ -61,10 +61,10 @@ form.addEventListener('submit', (evt) => {
   evt.preventDefault();
 
   const isValid = pristine.validate();
+  console.log(isValid)
 
   if (isValid) {
     const data = new FormData(evt.target);
-
     sendData(data);
   }
 });
