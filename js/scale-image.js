@@ -11,7 +11,7 @@ const STEP = 25;
 
 const getValue = () => parseInt(scaleValueInput.value, 10);
 
-const changeImage = (value) => {
+export const changeImage = (value) => {
   scaleValueInput.setAttribute("value", `${value}%`);
   image.style.transform = `scale(${value / 100})`;
 };

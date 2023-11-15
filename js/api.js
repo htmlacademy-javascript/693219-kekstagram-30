@@ -13,7 +13,6 @@ const ErrorText = {
 };
 
 const showAlert = (errorText) => {
-  console.log(1);
   const errorFragment =
     document.querySelector("#data-error").content.firstElementChild;
 

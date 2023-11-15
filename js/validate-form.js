@@ -1,8 +1,5 @@
 import Pristine from "pristinejs";
-import { sendData } from "./api";
 import { form, textHashtags } from "./elements";
-import { onCloseImageUpload } from "./form";
-import { resetEffect } from "./slider";
 
 const pristine = new Pristine(form, {
   classTo: "img-upload__field-wrapper",
@@ -56,16 +53,4 @@ pristine.addValidator(
   "хэш-теги повторяются"
 );
 
-form.addEventListener("submit", (evt) => {
-  evt.preventDefault();
-
-  const isValid = pristine.validate();
-
-  if (isValid) {
-    const data = new FormData(evt.target);
-    sendData(data);
-    resetEffect();
-    form.reset();
-    onCloseImageUpload();
-  }
-});
+export const isValid = () => pristine.validate();

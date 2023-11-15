@@ -1,3 +1,9 @@
+import { form } from "./elements";
+import { changeImage } from "./scale-image";
+import { isValid } from "./validate-form";
+import { sendData } from "./api";
+import { resetEffect } from "./slider";
+
 const imageInput = document.querySelector(".img-upload__input");
 const imageUpload = document.querySelector(".img-upload__overlay");
 const closeImageButton = document.querySelector(".img-upload__cancel");
@@ -32,4 +38,19 @@ function onDocumentKeydown(evt) {
 imageInput.addEventListener("change", onOpenImageUpload);
 closeImageButton.addEventListener("click", onCloseImageUpload);
 
-export { onCloseImageUpload };
+const resetForm = () => {
+  resetEffect();
+  form.reset();
+  changeImage(100);
+  onCloseImageUpload();
+};
+
+form.addEventListener("submit", (evt) => {
+  evt.preventDefault();
+
+  if (isValid()) {
+    const data = new FormData(evt.target);
+    sendData(data);
+    resetForm();
+  }
+});
