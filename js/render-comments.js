@@ -1,28 +1,21 @@
-import { Comment } from './mock';
-import { getElement } from './util';
+import { list, loaderButton, totalCount, shownCount } from "./elements";
 
 const PACK_SIZE = 5;
+let allComments = [];
 
-const list = getElement<HTMLUListElement>('.social__comments');
-const loaderButton = getElement('.social__comments-loader');
-const photoElement = getElement('.big-picture');
-const totalCount = getElement('.social__comment-total-count', photoElement);
-const shownCount = getElement('.social__comment-shown-count', photoElement);
-let allComments: Comment[] = [];
+const createComment = (comment) => {
+  const commentElement = document.createElement("li");
+  commentElement.className = "social__comment";
 
-const createComment = (comment: Comment): HTMLElement => {
-  const commentElement: HTMLLIElement = document.createElement('li');
-  commentElement.className = 'social__comment';
-
-  const avatarElement: HTMLImageElement = document.createElement('img');
-  avatarElement.className = 'social__picture';
+  const avatarElement = document.createElement("img");
+  avatarElement.className = "social__picture";
   avatarElement.src = comment.avatar;
   avatarElement.alt = comment.name;
   avatarElement.width = 35;
   avatarElement.height = 35;
 
-  const textElement: HTMLParagraphElement = document.createElement('p');
-  textElement.className = 'social__text';
+  const textElement = document.createElement("p");
+  textElement.className = "social__text";
   textElement.textContent = comment.message;
 
   commentElement.appendChild(avatarElement);
@@ -49,18 +42,18 @@ const loadNextComments = () => {
   shownCount.textContent = nextShowedAmount.toString();
 
   loaderButton.classList.toggle(
-    'hidden',
+    "hidden",
     nextShowedAmount >= allComments.length
   );
 };
 
-const renderComments = (comments: Comment[]) => {
+const renderComments = (comments) => {
   allComments = comments;
   totalCount.textContent = comments.length.toString();
-  list.innerHTML = '';
+  list.innerHTML = "";
   loadNextComments();
 };
 
-loaderButton.addEventListener('click', loadNextComments);
+loaderButton.addEventListener("click", loadNextComments);
 
 export { renderComments };
