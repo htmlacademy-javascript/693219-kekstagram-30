@@ -1,10 +1,7 @@
 import { openPhoto, closePhoto } from './big-picture.js';
 import { getElement } from './util.js';
+import { picturesElement, pictureFragment, photoCloseElement } from './elements.js';
 
-const picturesElement = getElement('.pictures');
-const pictureFragment =
-  getElement('#picture').content.firstElementChild;
-const photoCloseElement = getElement('.big-picture__cancel');
 
 const renderPhoto = (photos) => {
   photos.forEach((photo) => {
@@ -24,3 +21,5 @@ const renderPhoto = (photos) => {
 };
 
 export { renderPhoto };
+
+

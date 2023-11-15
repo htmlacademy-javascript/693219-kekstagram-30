@@ -1,13 +1,8 @@
-import { getElement } from './util';
 import noUiSlider from 'nouislider';
 import 'nouislider/dist/nouislider.css';
 import { EFFECT_OPTION_MAP } from './effect-map';
+import { sliderElement, image, effectsWrapper, sliderFieldset, form} from './elements';
 
-const sliderElement = getElement('.effect-level__slider');
-const form = getElement('.img-upload__form');
-const image = getElement('.img-upload__preview img');
-const effectsWrapper = getElement('.effects__list');
-const sliderFieldset = getElement('.img-upload__effect-level');
 const CHANGE_EVENT = new Event('change');
 
 const slider = noUiSlider.create(sliderElement, EFFECT_OPTION_MAP.none.slider);

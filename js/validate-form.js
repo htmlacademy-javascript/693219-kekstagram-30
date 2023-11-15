@@ -1,9 +1,7 @@
 import Pristine from 'pristinejs';
-import { getElement } from './util';
 import { sendData } from './api';
+import { form, textHashtags } from './elements';
 
-const form = getElement('.img-upload__form');
-const textHashtags = getElement('.text__hashtags');
 
 const pristine = new Pristine(form, {
   classTo: 'img-upload__field-wrapper',
