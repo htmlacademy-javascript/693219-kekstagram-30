@@ -1,5 +1,4 @@
 import { openPhoto, closePhoto } from "./big-picture.js";
-import { getElement } from "./util.js";
 import {
   picturesElement,
   pictureFragment,
@@ -10,12 +9,12 @@ const renderPhoto = (photos) => {
   photos.forEach((photo) => {
     const { comments, description, likes, url } = photo;
     const pictureElement = pictureFragment.cloneNode(true);
-    const image = getElement(".picture__img", pictureElement);
+    const image = pictureElement.querySelector(".picture__img");
     image.src = url;
     image.alt = description;
-    getElement(".picture__likes", pictureElement).textContent =
+    pictureElement.querySelector(".picture__likes").textContent =
       likes.toString();
-    getElement(".picture__comments", pictureElement).textContent =
+    pictureElement.querySelector(".picture__comments").textContent =
       comments.length.toString();
     picturesElement.appendChild(pictureElement);
     pictureElement.addEventListener("click", () => openPhoto(photo));
