@@ -1,7 +1,5 @@
 import { renderComments } from "./render-comments";
-import { getElement } from "./util";
-
-const photoElement = getElement(".big-picture");
+import { photoElement } from "./elements";
 
 const onDocumentKeydown = (evt) => {
   if (evt.key === "Escape") {
@@ -16,9 +14,9 @@ const toggleClasses = (isWillBeOpened = true) => {
 };
 
 const renderPhotoInformation = ({ url, likes, description }) => {
-  getElement(".big-picture__img img", photoElement).src = url;
-  getElement(".likes-count", photoElement).textContent = likes.toString();
-  getElement(".social__caption", photoElement).textContent = description;
+  photoElement.querySelector(".big-picture__img img").src = url;
+  photoElement.querySelector(".likes-count").textContent = likes.toString();
+  photoElement.querySelector(".social__caption").textContent = description;
 };
 
 const openPhoto = (photo) => {

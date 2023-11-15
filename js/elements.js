@@ -11,7 +11,7 @@ const picturesElement = document.querySelector(".pictures");
 const pictureFragment =
   document.querySelector("#picture").content.firstElementChild;
 const photoCloseElement = document.querySelector(".big-picture__cancel");
-const photoElement = getElement(".big-picture");
+const photoElement = document.querySelector(".big-picture");
 
 export {
   form,
