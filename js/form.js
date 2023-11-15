@@ -1,8 +1,6 @@
-import { getElement } from "./util";
-
-const imageInput = getElement(".img-upload__input");
-const imageUpload = getElement(".img-upload__overlay");
-const closeImageButton = getElement(".img-upload__cancel");
+const imageInput = document.querySelector(".img-upload__input");
+const imageUpload = document.querySelector(".img-upload__overlay");
+const closeImageButton = document.querySelector(".img-upload__cancel");
 
 const toggleClasses = (isOpen = true) => {
   imageUpload.classList.toggle("hidden", !isOpen);
@@ -22,8 +20,8 @@ const onCloseImageUpload = () => {
 
 function onDocumentKeydown(evt) {
   const isForm =
-    document.activeElement === getElement(".text__hashtags") ||
-    document.activeElement === getElement(".text__description");
+    document.activeElement === document.querySelector(".text__hashtags") ||
+    document.activeElement === document.querySelector(".text__description");
 
   if (evt.key === "Escape" && !isForm) {
     evt.preventDefault();
@@ -33,3 +31,5 @@ function onDocumentKeydown(evt) {
 
 imageInput.addEventListener("change", onOpenImageUpload);
 closeImageButton.addEventListener("click", onCloseImageUpload);
+
+export { onCloseImageUpload };

@@ -12,6 +12,10 @@ const pictureFragment =
   document.querySelector("#picture").content.firstElementChild;
 const photoCloseElement = document.querySelector(".big-picture__cancel");
 const photoElement = document.querySelector(".big-picture");
+const list = document.querySelector(".social__comments");
+const loaderButton = document.querySelector(".social__comments-loader");
+const totalCount = photoElement.querySelector(".social__comment-total-count");
+const shownCount = photoElement.querySelector(".social__comment-shown-count");
 
 export {
   form,
@@ -27,4 +31,8 @@ export {
   pictureFragment,
   photoCloseElement,
   photoElement,
+  list,
+  loaderButton,
+  totalCount,
+  shownCount,
 };

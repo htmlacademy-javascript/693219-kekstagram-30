@@ -1,4 +1,3 @@
-import { getElement } from "./util";
 import {
   scaleSmallerButton,
   scaleBiggerButton,

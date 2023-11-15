@@ -1,12 +1,6 @@
-import { getElement } from "./util";
+import { list, loaderButton, totalCount, shownCount } from "./elements";
 
 const PACK_SIZE = 5;
-
-const list = getElement(".social__comments");
-const loaderButton = getElement(".social__comments-loader");
-const photoElement = getElement(".big-picture");
-const totalCount = getElement(".social__comment-total-count", photoElement);
-const shownCount = getElement(".social__comment-shown-count", photoElement);
 let allComments = [];
 
 const createComment = (comment) => {
