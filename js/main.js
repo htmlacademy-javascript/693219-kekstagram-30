@@ -5,8 +5,7 @@ import './slider.js';
 
 import { renderPhoto } from './render-photo.js';
 import { getData } from './api.js';
-import { Photo } from './mock.js';
 
-const images = await getData() as Photo[];
+const images = await getData();
 
 renderPhoto(images);

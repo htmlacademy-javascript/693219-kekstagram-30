@@ -3,8 +3,8 @@ import noUiSlider from 'nouislider';
 import 'nouislider/dist/nouislider.css';
 import { EFFECT_OPTION_MAP } from './effect-map';
 
-const sliderElement = getElement<HTMLDivElement>('.effect-level__slider');
-const form = getElement<HTMLFormElement>('.img-upload__form');
+const sliderElement = getElement('.effect-level__slider');
+const form = getElement('.img-upload__form');
 const image = getElement('.img-upload__preview img');
 const effectsWrapper = getElement('.effects__list');
 const sliderFieldset = getElement('.img-upload__effect-level');
@@ -15,7 +15,7 @@ const slider = noUiSlider.create(sliderElement, EFFECT_OPTION_MAP.none.slider);
 sliderFieldset.hidden = true;
 
 effectsWrapper.addEventListener('change', () => {
-  const effect = form!.effect.value;
+  const effect = form.effect.value;
 
   sliderFieldset.hidden = effect === 'none';
 
@@ -23,16 +23,16 @@ effectsWrapper.addEventListener('change', () => {
 });
 
 slider.on('update', () => {
-  const value = slider.get() as number;
+  const value = slider.get();
   form['effect-level'].value = String(value);
 
-  const currentEffect = form!.effect.value;
+  const currentEffect = form.effect.value;
 
   if (currentEffect === 'none') {
     return image.style.removeProperty('filter');
   }
 
-  const filter = EFFECT_OPTION_MAP[currentEffect].filter!;
+  const filter = EFFECT_OPTION_MAP[currentEffect].filter;
   image.style.filter = filter(value);
 });
 

@@ -2,8 +2,8 @@ import Pristine from 'pristinejs';
 import { getElement } from './util';
 import { sendData } from './api';
 
-const form = getElement<HTMLFormElement>('.img-upload__form');
-const textHashtags = getElement<HTMLInputElement>('.text__hashtags');
+const form = getElement('.img-upload__form');
+const textHashtags = getElement('.text__hashtags');
 
 const pristine = new Pristine(form, {
   classTo: 'img-upload__field-wrapper',
@@ -14,13 +14,13 @@ const pristine = new Pristine(form, {
 
 pristine.addValidator(
   textHashtags,
-  (value: string) => value.length < 140,
+  (value) => value.length < 140,
   'Длина комментария больше 140 символов'
 );
 
 pristine.addValidator(
   textHashtags,
-  (value: string) => {
+  (value) => {
     const hashtags = value.trim().split(' ');
     return hashtags.length - 1 < 5;
   },
@@ -29,7 +29,7 @@ pristine.addValidator(
 
 pristine.addValidator(
   textHashtags,
-  (value: string) => {
+  (value) => {
     const hashtags = value.trim().split(' ');
     const regexPattern = /^#(?=.*[^0-9])[a-zа-яё0-9]{1,29}$/i;
 
@@ -50,7 +50,7 @@ pristine.addValidator(
 
 pristine.addValidator(
   form.querySelector('.text__hashtags'),
-  (value: string) => {
+  (value) => {
     const hashtags = value.trim().toLocaleLowerCase().split(' ');
     return !(new Set(hashtags).size !== hashtags.length);
   },
@@ -58,8 +58,11 @@ pristine.addValidator(
 );
 
 form.addEventListener('submit', (evt) => {
-  if (!pristine.validate()) {
-    evt.preventDefault();
+  evt.preventDefault();
+
+  const isValid = pristine.validate();
+
+  if (isValid) {
     const data = new FormData(evt.target);
 
     sendData(data);

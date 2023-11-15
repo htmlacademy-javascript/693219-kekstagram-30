@@ -1,17 +1,16 @@
-import { Photo } from './mock.js';
 import { openPhoto, closePhoto } from './big-picture.js';
 import { getElement } from './util.js';
 
 const picturesElement = getElement('.pictures');
 const pictureFragment =
-  getElement<HTMLTemplateElement>('#picture').content.firstElementChild!;
+  getElement('#picture').content.firstElementChild;
 const photoCloseElement = getElement('.big-picture__cancel');
 
-const renderPhoto = (photos: Photo[]) => {
-  photos.forEach((photo: Photo) => {
+const renderPhoto = (photos) => {
+  photos.forEach((photo) => {
     const { comments, description, likes, url } = photo;
-    const pictureElement = pictureFragment.cloneNode(true) as HTMLElement;
-    const image = getElement<HTMLImageElement>('.picture__img', pictureElement);
+    const pictureElement = pictureFragment.cloneNode(true);
+    const image = getElement('.picture__img', pictureElement);
     image.src = url;
     image.alt = description;
     getElement('.picture__likes', pictureElement).textContent =

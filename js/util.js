@@ -4,7 +4,7 @@
  * @param max
  * @returns
  */
-const getRandomNumber = (min: number, max: number): number =>
+const getRandomNumber = (min, max) =>
   Math.floor(Math.random() * (max - min + 1) + min);
 
 /**
@@ -12,7 +12,7 @@ const getRandomNumber = (min: number, max: number): number =>
  * @param Исходный массив.
  * @returns Случайная элемент из массива.
  */
-const getRandomElement = <T>(array: T[]): T =>
+const getRandomElement = (array)=>
   array[getRandomNumber(0, array.length - 1)];
 
 /**
@@ -26,19 +26,19 @@ const getRandomElement = <T>(array: T[]): T =>
  * const generateRandomId = createUniqueIdGenerator(1, 10);
  * const randomId = generateRandomId(); // Возвращает уникальный идентификатор в диапазоне [1, 10].
  */
-function createUniqueIdGenerator(min: number, max: number): () => number {
-  const usedIds: Set<number> = new Set();
+function createUniqueIdGenerator(min, max) {
+  const usedIds = new Set();
 
   if (min > max) {
     throw new Error('Некорректный диапазон чисел');
   }
 
-  return (): number => {
+  return () => {
     if (usedIds.size >= max - min + 1) {
       throw new Error('Исчерпаны все доступные id в заданном диапазоне');
     }
 
-    let randomId: number = getRandomNumber(min, max);
+    let randomId = getRandomNumber(min, max);
 
     while (usedIds.has(randomId)) {
       randomId = getRandomNumber(min, max);
@@ -50,11 +50,11 @@ function createUniqueIdGenerator(min: number, max: number): () => number {
   };
 }
 
-const getElement = <E extends Element = HTMLDivElement>(
-  selector: string,
-  target: HTMLElement | Document = document
+const getElement = (
+  selector,
+  target = document
 ) => {
-  const element = target.querySelector<E>(selector);
+  const element = target.querySelector(selector);
   if (!element) {
     throw new Error(
       `Element with selector '${selector}' not found target ${target}`

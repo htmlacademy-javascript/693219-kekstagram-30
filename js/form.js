@@ -1,10 +1,10 @@
 import { getElement } from './util';
 
-const imageInput = getElement<HTMLInputElement>('.img-upload__input');
-const imageUpload = getElement<HTMLElement>('.img-upload__overlay');
-const closeImageButton = getElement<HTMLButtonElement>('.img-upload__cancel');
+const imageInput = getElement('.img-upload__input');
+const imageUpload = getElement('.img-upload__overlay');
+const closeImageButton = getElement('.img-upload__cancel');
 
-const toggleClasses = (isOpen: boolean = true) => {
+const toggleClasses = (isOpen = true) => {
   imageUpload.classList.toggle('hidden', !isOpen);
   document.body.classList.toggle('modal-open', isOpen);
 };
@@ -20,12 +20,11 @@ const onCloseImageUpload = () => {
   document.removeEventListener('keydown', onDocumentKeydown);
 };
 
-function onDocumentKeydown(evt: KeyboardEvent) {
+function onDocumentKeydown(evt) {
   const isForm =
     document.activeElement === getElement('.text__hashtags') ||
     document.activeElement === getElement('.text__description');
 
-  // console.log(isForm);
   if (evt.key === 'Escape' && !isForm) {
     evt.preventDefault();
     onCloseImageUpload();
