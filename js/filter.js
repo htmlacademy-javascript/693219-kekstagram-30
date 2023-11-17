@@ -1,9 +1,13 @@
 import { renderPhoto } from "./render-photo.js";
+import { debounce } from "./util.js";
+
+const RERENDER_DELAY = 500;
 
 const filterElement = document.querySelector(".img-filters");
-const filterForm = document.querySelector(".img-filters__form");
+const filterButtons = document.querySelectorAll(".img-filters__button");
+let filters;
 
-export const getFilters = (images) => {
+const getFilters = (images) => {
   return {
     default: images,
     random: images.slice(0, 10),
@@ -13,21 +17,25 @@ export const getFilters = (images) => {
   };
 };
 
-export const loadFilters = (images) => {
+const reRender = (evt, filterName) => {
+  renderPhoto(filters[filterName]);
+};
+
+export const showFilters = (images) => {
   filterElement.style.opacity = "1";
+  filters = getFilters(images);
 
-  const a = getFilters(images);
+  filterButtons.forEach((filterButton) => {
+    filterButton.addEventListener("click", (evt) => {
+      if (!evt.target.classList.contains("img-filters__button--active")) {
+        const filterName = evt.target.id.replace("filter-", "");
+        document
+          .querySelector(".img-filters__button--active")
+          .classList.remove("img-filters__button--active");
+        evt.target.classList.add("img-filters__button--active");
 
-  filterForm.addEventListener("click", (evt) => {
-    document
-      .querySelector(".img-filters__button--active")
-      .classList.remove("img-filters__button--active");
-    evt.target.classList.add("img-filters__button--active");
-
-    document.querySelectorAll(".picture").forEach((element) => {
-      element.remove();
+        debounce(reRender, RERENDER_DELAY)(evt, filterName);
+      }
     });
-    console.log(evt.target.id.replace("filter-", ""));
-    renderPhoto(a[evt.target.id.replace("filter-", "")]);
   });
 };

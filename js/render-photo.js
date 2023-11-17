@@ -6,6 +6,10 @@ import {
 } from "./elements.js";
 
 const renderPhoto = (photos) => {
+  document.querySelectorAll(".picture").forEach((element) => {
+    element.remove();
+  });
+
   photos.forEach((photo) => {
     const { comments, description, likes, url } = photo;
     const pictureElement = pictureFragment.cloneNode(true);
