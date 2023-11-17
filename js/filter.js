@@ -5,7 +5,6 @@ const RERENDER_DELAY = 500;
 
 const filterElement = document.querySelector(".img-filters");
 const filterButtons = document.querySelectorAll(".img-filters__button");
-let filters;
 
 const getFilters = (images) => {
   return {
@@ -17,24 +16,30 @@ const getFilters = (images) => {
   };
 };
 
-const reRender = (evt, filterName) => {
-  renderPhoto(filters[filterName]);
+const isButtonNotActive = (target) =>
+  !target.classList.contains("img-filters__button--active");
+
+const toggleActiveButton = (target) => {
+  document
+    .querySelector(".img-filters__button--active")
+    .classList.remove("img-filters__button--active");
+  target.classList.add("img-filters__button--active");
 };
+
+const debounceRenderPhoto = (filters, filterName) =>
+  debounce(() => renderPhoto(filters[filterName]), RERENDER_DELAY)(filterName);
 
 export const showFilters = (images) => {
   filterElement.style.opacity = "1";
-  filters = getFilters(images);
+  const filters = getFilters(images);
 
   filterButtons.forEach((filterButton) => {
     filterButton.addEventListener("click", (evt) => {
-      if (!evt.target.classList.contains("img-filters__button--active")) {
-        const filterName = evt.target.id.replace("filter-", "");
-        document
-          .querySelector(".img-filters__button--active")
-          .classList.remove("img-filters__button--active");
-        evt.target.classList.add("img-filters__button--active");
+      const filterName = evt.target.id.replace("filter-", "");
 
-        debounce(reRender, RERENDER_DELAY)(evt, filterName);
+      if (isButtonNotActive(evt.target)) {
+        toggleActiveButton(evt.target);
+        debounceRenderPhoto(filters, filterName);
       }
     });
   });
