@@ -27,7 +27,7 @@ pristine.addValidator(
   textHashtags,
   (value) => {
     const hashtags = value.trim().split(' ');
-    const regexPattern = /^#(?=.*[^0-9])[a-zа-яё0-9]{1,29}$/i;
+    const regexPattern = /^#(?=.*[^0-9])[a-zа-яё0-9]{1,19}$/i;
 
     if (hashtags[0] === '') {
       return true;

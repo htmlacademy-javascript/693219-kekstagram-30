@@ -24,6 +24,13 @@ const onCloseImageUpload = () => {
   document.removeEventListener('keydown', onDocumentKeydown);
 };
 
+const resetForm = () => {
+  resetEffect();
+  form.reset();
+  changeImage(100);
+  onCloseImageUpload();
+};
+
 function onDocumentKeydown(evt) {
   const isForm =
     document.activeElement === document.querySelector('.text__hashtags') ||
@@ -32,18 +39,12 @@ function onDocumentKeydown(evt) {
   if (evt.key === 'Escape' && !isForm) {
     evt.preventDefault();
     onCloseImageUpload();
+    resetForm();
   }
 }
 
 imageInput.addEventListener('change', onOpenImageUpload);
 closeImageButton.addEventListener('click', onCloseImageUpload);
-
-const resetForm = () => {
-  resetEffect();
-  form.reset();
-  changeImage(100);
-  onCloseImageUpload();
-};
 
 form.addEventListener('submit', (evt) => {
   evt.preventDefault();
