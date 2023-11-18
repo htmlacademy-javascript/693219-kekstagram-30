@@ -5,10 +5,13 @@ import {
   photoCloseElement,
 } from './elements.js';
 
-const renderPhoto = (photos) => {
+const removePictures = () =>
   document.querySelectorAll('.picture').forEach((element) => {
     element.remove();
   });
+
+const renderPhoto = (photos) => {
+  removePictures();
 
   photos.forEach((photo) => {
     const { comments, description, likes, url } = photo;

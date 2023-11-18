@@ -3,7 +3,7 @@ import { debounce } from './util.js';
 
 const RERENDER_DELAY = 500;
 
-const filterElement = document.querySelector('.img-filters');
+const filterWrapper = document.querySelector('.img-filters');
 const filterButtons = document.querySelectorAll('.img-filters__button');
 
 const getFilters = (images) => ({
@@ -22,12 +22,10 @@ const toggleActiveButton = (target) => {
   target.classList.add('img-filters__button--active');
 };
 
-const debounceRenderPhoto = (filters, filterName) =>
-  debounce(() => renderPhoto(filters[filterName]), RERENDER_DELAY)(filterName);
-
 export const showFilters = (images) => {
-  filterElement.style.opacity = '1';
+  filterWrapper.classList.remove('img-filters--inactive');
   const filters = getFilters(images);
+  const debounceRenderPhoto = debounce(renderPhoto, RERENDER_DELAY);
 
   filterButtons.forEach((filterButton) => {
     filterButton.addEventListener('click', (evt) => {
@@ -35,7 +33,7 @@ export const showFilters = (images) => {
 
       if (isButtonNotActive(evt.target)) {
         toggleActiveButton(evt.target);
-        debounceRenderPhoto(filters, filterName);
+        debounceRenderPhoto(filters[filterName]);
       }
     });
   });
