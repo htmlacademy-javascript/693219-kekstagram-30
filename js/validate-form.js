@@ -1,35 +1,35 @@
-import Pristine from "pristinejs";
-import { form, textHashtags } from "./elements";
+import Pristine from 'pristinejs';
+import { form, textHashtags } from './elements';
 
 const pristine = new Pristine(form, {
-  classTo: "img-upload__field-wrapper",
-  errorClass: "img-upload__field-wrapper--error",
-  errorTextParent: "img-upload__field-wrapper",
-  errorTextTag: "p",
+  classTo: 'img-upload__field-wrapper',
+  errorClass: 'img-upload__field-wrapper--error',
+  errorTextParent: 'img-upload__field-wrapper',
+  errorTextTag: 'p',
 });
 
 pristine.addValidator(
   textHashtags,
   (value) => value.length < 140,
-  "Длина комментария больше 140 символов"
+  'Длина комментария больше 140 символов'
 );
 
 pristine.addValidator(
   textHashtags,
   (value) => {
-    const hashtags = value.trim().split(" ");
+    const hashtags = value.trim().split(' ');
     return hashtags.length - 1 < 5;
   },
-  "превышено количество хэш-тегов"
+  'превышено количество хэш-тегов'
 );
 
 pristine.addValidator(
   textHashtags,
   (value) => {
-    const hashtags = value.trim().split(" ");
+    const hashtags = value.trim().split(' ');
     const regexPattern = /^#(?=.*[^0-9])[a-zа-яё0-9]{1,29}$/i;
 
-    if (hashtags[0] === "") {
+    if (hashtags[0] === '') {
       return true;
     }
 
@@ -41,16 +41,16 @@ pristine.addValidator(
 
     return true;
   },
-  "введён невалидный хэш-тег"
+  'введён невалидный хэш-тег'
 );
 
 pristine.addValidator(
-  form.querySelector(".text__hashtags"),
+  form.querySelector('.text__hashtags'),
   (value) => {
-    const hashtags = value.trim().toLocaleLowerCase().split(" ");
+    const hashtags = value.trim().toLocaleLowerCase().split(' ');
     return !(new Set(hashtags).size !== hashtags.length);
   },
-  "хэш-теги повторяются"
+  'хэш-теги повторяются'
 );
 
 export const isValid = () => pristine.validate();

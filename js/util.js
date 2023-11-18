@@ -7,12 +7,12 @@ function createUniqueIdGenerator(min, max) {
   const usedIds = new Set();
 
   if (min > max) {
-    throw new Error("Некорректный диапазон чисел");
+    throw new Error('Некорректный диапазон чисел');
   }
 
   return () => {
     if (usedIds.size >= max - min + 1) {
-      throw new Error("Исчерпаны все доступные id в заданном диапазоне");
+      throw new Error('Исчерпаны все доступные id в заданном диапазоне');
     }
 
     let randomId = getRandomNumber(min, max);

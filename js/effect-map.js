@@ -39,6 +39,6 @@ function createSliderData(min = 0, max = 100, step = 1, start = max) {
     },
     start,
     step,
-    connect: "lower",
+    connect: 'lower',
   };
 }

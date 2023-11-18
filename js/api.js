@@ -1,23 +1,23 @@
-const BASE_URL = "https://30.javascript.pages.academy/kekstagram";
+const BASE_URL = 'https://30.javascript.pages.academy/kekstagram';
 const Route = {
-  GET_DATA: "/data",
-  SEND_DATA: "/",
+  GET_DATA: '/data',
+  SEND_DATA: '/',
 };
 const Method = {
-  GET: "GET",
-  POST: "POST",
+  GET: 'GET',
+  POST: 'POST',
 };
 const ErrorText = {
-  GET_DATA: "Не удалось загрузить данные. Попробуйте обновить страницу",
-  SEND_DATA: "Не удалось отправить форму. Попробуйте ещё раз",
+  GET_DATA: 'Не удалось загрузить данные. Попробуйте обновить страницу',
+  SEND_DATA: 'Не удалось отправить форму. Попробуйте ещё раз',
 };
 
 const showAlert = (errorText) => {
   const errorFragment =
-    document.querySelector("#data-error").content.firstElementChild;
+    document.querySelector('#data-error').content.firstElementChild;
 
   const errorElement = errorFragment.cloneNode(true);
-  const errorTitle = errorElement.querySelector(".data-error__title");
+  const errorTitle = errorElement.querySelector('.data-error__title');
 
   errorTitle.textContent = errorText;
   document.body.appendChild(errorElement);

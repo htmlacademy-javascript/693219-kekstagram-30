@@ -1,8 +1,8 @@
-import "./form.js";
+import './form.js';
 
-import { showFilters } from "./filter.js";
-import { renderPhoto } from "./render-photo.js";
-import { getData } from "./api.js";
+import { showFilters } from './filter.js';
+import { renderPhoto } from './render-photo.js';
+import { getData } from './api.js';
 
 const images = await getData();
 
