@@ -5,7 +5,6 @@ import { showFilters } from './filter.js';
 import { renderPhoto } from './render-photo.js';
 import { getData } from './api.js';
 
-getData().then((images) => {
-  renderPhoto(images);
-  showFilters(images);
-});
+const images = await getData();
+renderPhoto(images);
+showFilters(images);
