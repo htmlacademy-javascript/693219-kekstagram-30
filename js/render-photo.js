@@ -1,25 +1,32 @@
-import { openPhoto, closePhoto } from "./big-picture.js";
+import { openPhoto, closePhoto } from './big-picture.js';
 import {
   picturesElement,
   pictureFragment,
   photoCloseElement,
-} from "./elements.js";
+} from './elements.js';
+
+const removePictures = () =>
+  document.querySelectorAll('.picture').forEach((element) => {
+    element.remove();
+  });
 
 const renderPhoto = (photos) => {
+  removePictures();
+
   photos.forEach((photo) => {
     const { comments, description, likes, url } = photo;
     const pictureElement = pictureFragment.cloneNode(true);
-    const image = pictureElement.querySelector(".picture__img");
+    const image = pictureElement.querySelector('.picture__img');
     image.src = url;
     image.alt = description;
-    pictureElement.querySelector(".picture__likes").textContent =
+    pictureElement.querySelector('.picture__likes').textContent =
       likes.toString();
-    pictureElement.querySelector(".picture__comments").textContent =
+    pictureElement.querySelector('.picture__comments').textContent =
       comments.length.toString();
     picturesElement.appendChild(pictureElement);
-    pictureElement.addEventListener("click", () => openPhoto(photo));
+    pictureElement.addEventListener('click', () => openPhoto(photo));
   });
-  photoCloseElement.addEventListener("click", closePhoto);
+  photoCloseElement.addEventListener('click', closePhoto);
 };
 
 export { renderPhoto };
