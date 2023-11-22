@@ -10,6 +10,7 @@ const showAlertGetData = () => {
     document.querySelector('#data-error').content.firstElementChild;
 
   const errorElement = errorFragment.cloneNode(true);
+  document.body.appendChild(errorElement);
   setInterval(() => {
     errorElement.remove();
   }, 5000);
@@ -17,6 +18,7 @@ const showAlertGetData = () => {
 
 try {
   const images = await getData();
+
   renderPhoto(images);
   showFilters(images);
 } catch (err) {
