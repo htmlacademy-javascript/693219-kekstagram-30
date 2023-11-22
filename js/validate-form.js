@@ -1,5 +1,5 @@
 import Pristine from 'pristinejs';
-import { form, textHashtags } from './elements';
+import { form, textHashtags, textDescription } from './elements';
 
 const pristine = new Pristine(form, {
   classTo: 'img-upload__field-wrapper',
@@ -9,7 +9,7 @@ const pristine = new Pristine(form, {
 });
 
 pristine.addValidator(
-  textHashtags,
+  textDescription,
   (value) => value.length < 140,
   'Длина комментария больше 140 символов'
 );
@@ -65,3 +65,4 @@ pristine.addValidator(
 );
 
 export const isValid = () => pristine.validate();
+export const resetPristine = () => pristine.reset();

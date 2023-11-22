@@ -3,6 +3,7 @@ import { changeImage } from './scale-image';
 import { isValid } from './validate-form';
 import { sendData } from './api';
 import { resetEffect } from './slider';
+import { resetPristine } from './validate-form';
 
 const imageInput = document.querySelector('.img-upload__input');
 const imageUpload = document.querySelector('.img-upload__overlay');
@@ -35,6 +36,7 @@ const resetForm = () => {
   form.reset();
   changeImage(100);
   onCloseImageUpload();
+  resetPristine();
 };
 
 function onDocumentKeydown(evt) {

@@ -1,5 +1,6 @@
 const form = document.querySelector('.img-upload__form');
 const textHashtags = document.querySelector('.text__hashtags');
+const textDescription = document.querySelector('.text__description');
 const sliderElement = document.querySelector('.effect-level__slider');
 const image = document.querySelector('.img-upload__preview img');
 const effectsWrapper = document.querySelector('.effects__list');
@@ -35,4 +36,5 @@ export {
   loaderButton,
   totalCount,
   shownCount,
+  textDescription,
 };
