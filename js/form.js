@@ -40,11 +40,13 @@ const resetForm = () => {
 };
 
 function onDocumentKeydown(evt) {
+  const isError = document.querySelector('.error');
+
   const isForm =
     document.activeElement === document.querySelector('.text__hashtags') ||
     document.activeElement === document.querySelector('.text__description');
 
-  if (evt.key === 'Escape' && !isForm) {
+  if (evt.key === 'Escape' && !isForm && !isError) {
     evt.preventDefault();
     onCloseImageUpload();
     resetForm();
