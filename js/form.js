@@ -3,6 +3,7 @@ import { changeImage } from './scale-image';
 import { isValid } from './validate-form';
 import { sendData } from './api';
 import { resetEffect } from './slider';
+import { resetPristine } from './validate-form';
 
 const imageInput = document.querySelector('.img-upload__input');
 const imageUpload = document.querySelector('.img-upload__overlay');
@@ -35,14 +36,17 @@ const resetForm = () => {
   form.reset();
   changeImage(100);
   onCloseImageUpload();
+  resetPristine();
 };
 
 function onDocumentKeydown(evt) {
+  const isError = document.querySelector('.error');
+
   const isForm =
     document.activeElement === document.querySelector('.text__hashtags') ||
     document.activeElement === document.querySelector('.text__description');
 
-  if (evt.key === 'Escape' && !isForm) {
+  if (evt.key === 'Escape' && !isForm && !isError) {
     evt.preventDefault();
     onCloseImageUpload();
     resetForm();
