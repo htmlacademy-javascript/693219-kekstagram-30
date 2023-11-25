@@ -13,8 +13,8 @@ fileChooser.addEventListener('change', () => {
   if (matches) {
     const url = URL.createObjectURL(file);
     preview.src = url;
-    previewEffects.forEach((el) => {
-      el.style.backgroundImage = `url('${url}')`;
+    previewEffects.forEach((effect) => {
+      effect.style.backgroundImage = `url('${url}')`;
     });
   }
 });

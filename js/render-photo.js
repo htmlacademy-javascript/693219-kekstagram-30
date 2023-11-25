@@ -6,8 +6,8 @@ import {
 } from './elements.js';
 
 const removePictures = () =>
-  document.querySelectorAll('.picture').forEach((element) => {
-    element.remove();
+  document.querySelectorAll('.picture').forEach((picture) => {
+    picture.remove();
   });
 
 const renderPhoto = (photos) => {

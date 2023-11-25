@@ -25,12 +25,6 @@ const onOpenImageUpload = () => {
   document.addEventListener('keydown', onDocumentKeydown);
 };
 
-const onCloseImageUpload = () => {
-  imageInput.value = '';
-  toggleClasses(false);
-  document.removeEventListener('keydown', onDocumentKeydown);
-};
-
 const resetForm = () => {
   resetEffect();
   form.reset();
@@ -39,7 +33,13 @@ const resetForm = () => {
   resetPristine();
 };
 
-function onDocumentKeydown(evt) {
+const onCloseImageUpload = () => {
+  imageInput.value = '';
+  toggleClasses(false);
+  document.removeEventListener('keydown', onDocumentKeydown);
+};
+
+const onDocumentKeydown = (evt) => {
   const isError = document.querySelector('.error');
 
   const isForm =
@@ -51,10 +51,7 @@ function onDocumentKeydown(evt) {
     onCloseImageUpload();
     resetForm();
   }
-}
-
-imageInput.addEventListener('change', onOpenImageUpload);
-closeImageButton.addEventListener('click', onCloseImageUpload);
+};
 
 const showSuccess = () => {
   const errorFragment =
@@ -97,6 +94,10 @@ const showAlertSendData = () => {
     }
   });
 };
+
+imageInput.addEventListener('change', onOpenImageUpload);
+
+closeImageButton.addEventListener('click', onCloseImageUpload);
 
 form.addEventListener('submit', async (evt) => {
   evt.preventDefault();
