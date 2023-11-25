@@ -1,4 +1,4 @@
-import { openPhoto, closePhoto } from './big-picture.js';
+import { openPhoto, onClosePhotoButtonClick } from './big-picture.js';
 import {
   picturesElement,
   pictureFragment,
@@ -26,7 +26,7 @@ const renderPhoto = (photos) => {
     picturesElement.appendChild(pictureElement);
     pictureElement.addEventListener('click', () => openPhoto(photo));
   });
-  photoCloseElement.addEventListener('click', closePhoto);
+  photoCloseElement.addEventListener('click', onClosePhotoButtonClick);
 };
 
 export { renderPhoto };

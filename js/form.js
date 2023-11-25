@@ -20,7 +20,7 @@ const toggleSubmitButton = (isDisabled) => {
   submitButton.textContent = isDisabled ? 'Отправляю...' : 'Опубликовать';
 };
 
-const onOpenImageUpload = () => {
+const onImageInputChange = () => {
   toggleClasses();
   document.addEventListener('keydown', onDocumentKeydown);
 };
@@ -29,17 +29,17 @@ const resetForm = () => {
   resetEffect();
   form.reset();
   changeImage(100);
-  onCloseImageUpload();
+  onCloseImageButtonClick();
   resetPristine();
 };
 
-const onCloseImageUpload = () => {
+function onCloseImageButtonClick() {
   imageInput.value = '';
   toggleClasses(false);
   document.removeEventListener('keydown', onDocumentKeydown);
-};
+}
 
-const onDocumentKeydown = (evt) => {
+function onDocumentKeydown(evt) {
   const isError = document.querySelector('.error');
 
   const isForm =
@@ -48,10 +48,10 @@ const onDocumentKeydown = (evt) => {
 
   if (evt.key === 'Escape' && !isForm && !isError) {
     evt.preventDefault();
-    onCloseImageUpload();
+    onCloseImageButtonClick();
     resetForm();
   }
-};
+}
 
 const showSuccess = () => {
   const errorFragment =
@@ -95,9 +95,9 @@ const showAlertSendData = () => {
   });
 };
 
-imageInput.addEventListener('change', onOpenImageUpload);
+imageInput.addEventListener('change', onImageInputChange);
 
-closeImageButton.addEventListener('click', onCloseImageUpload);
+closeImageButton.addEventListener('click', onCloseImageButtonClick);
 
 form.addEventListener('submit', async (evt) => {
   evt.preventDefault();
