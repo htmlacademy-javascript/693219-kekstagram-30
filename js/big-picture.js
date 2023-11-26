@@ -4,7 +4,7 @@ import { photoElement } from './elements';
 const onDocumentKeydown = (evt) => {
   if (evt.key === 'Escape') {
     evt.preventDefault();
-    closePhoto();
+    onClosePhotoButtonClick();
   }
 };
 
@@ -26,9 +26,9 @@ const openPhoto = (photo) => {
   document.addEventListener('keydown', onDocumentKeydown);
 };
 
-function closePhoto() {
+function onClosePhotoButtonClick() {
   toggleClasses(false);
   document.removeEventListener('keydown', onDocumentKeydown);
 }
 
-export { openPhoto, closePhoto };
+export { openPhoto, onClosePhotoButtonClick };

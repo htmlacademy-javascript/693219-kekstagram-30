@@ -2,14 +2,16 @@ import { renderPhoto } from './render-photo.js';
 import { debounce } from './util.js';
 
 const RERENDER_DELAY = 500;
-
 const filterWrapper = document.querySelector('.img-filters');
 const filterButtons = document.querySelectorAll('.img-filters__button');
 
 const getFilters = (images) => ({
   default: images,
   random: images.slice(0, 10),
-  discussed: [...images].sort((a, b) => b.comments.length - a.comments.length),
+  discussed: [...images].sort(
+    (firstElement, secondElement) =>
+      secondElement.comments.length - firstElement.comments.length
+  ),
 });
 
 const isButtonNotActive = (target) =>

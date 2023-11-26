@@ -24,8 +24,8 @@ effectsWrapper.addEventListener('change', () => {
 });
 
 slider.on('update', () => {
-  const value = slider.get();
-  form['effect-level'].value = String(value);
+  const sliderValue = slider.get();
+  form['effect-level'].value = String(sliderValue);
 
   const currentEffect = form.effect.value;
 
@@ -34,7 +34,7 @@ slider.on('update', () => {
   }
 
   const filter = EFFECT_OPTION_MAP[currentEffect].filter;
-  image.style.filter = filter(value);
+  image.style.filter = filter(sliderValue);
 });
 
 export const resetEffect = () => {

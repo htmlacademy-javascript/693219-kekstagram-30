@@ -1,4 +1,4 @@
-import { openPhoto, closePhoto } from './big-picture.js';
+import { openPhoto, onClosePhotoButtonClick } from './big-picture.js';
 import {
   picturesElement,
   pictureFragment,
@@ -6,8 +6,8 @@ import {
 } from './elements.js';
 
 const removePictures = () =>
-  document.querySelectorAll('.picture').forEach((element) => {
-    element.remove();
+  document.querySelectorAll('.picture').forEach((picture) => {
+    picture.remove();
   });
 
 const renderPhoto = (photos) => {
@@ -26,7 +26,7 @@ const renderPhoto = (photos) => {
     picturesElement.appendChild(pictureElement);
     pictureElement.addEventListener('click', () => openPhoto(photo));
   });
-  photoCloseElement.addEventListener('click', closePhoto);
+  photoCloseElement.addEventListener('click', onClosePhotoButtonClick);
 };
 
 export { renderPhoto };

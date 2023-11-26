@@ -16,7 +16,7 @@ export const changeImage = (value) => {
   image.style.transform = `scale(${value / 100})`;
 };
 
-const onScaleSmallerButton = () => {
+const onScaleSmallerButtonClick = () => {
   const value = getValue();
   let nextValue = value - STEP;
   nextValue = nextValue < MIN_VALUE ? MIN_VALUE : nextValue;
@@ -24,7 +24,7 @@ const onScaleSmallerButton = () => {
   changeImage(nextValue);
 };
 
-const onScaleBiggerButton = () => {
+const onScaleBiggerButtonClick = () => {
   const value = getValue();
 
   let nextValue = value + STEP;
@@ -33,5 +33,5 @@ const onScaleBiggerButton = () => {
   changeImage(nextValue);
 };
 
-scaleSmallerButton.addEventListener('click', onScaleSmallerButton);
-scaleBiggerButton.addEventListener('click', onScaleBiggerButton);
+scaleSmallerButton.addEventListener('click', onScaleSmallerButtonClick);
+scaleBiggerButton.addEventListener('click', onScaleBiggerButtonClick);

@@ -24,17 +24,17 @@ const createComment = (comment) => {
   return commentElement;
 };
 
-const loadNextComments = () => {
+const onLoaderButtonClick = () => {
   const currentShowedAmount = list.childElementCount;
   let nextShowedAmount = currentShowedAmount + PACK_SIZE;
   const isAllWillBeShown = nextShowedAmount >= allComments.length;
   nextShowedAmount = isAllWillBeShown ? allComments.length : nextShowedAmount;
-  const commentToRender = allComments.slice(
+  const commentsToRender = allComments.slice(
     currentShowedAmount,
     nextShowedAmount
   );
 
-  commentToRender.forEach((comment) => {
+  commentsToRender.forEach((comment) => {
     const newCommentElement = createComment(comment);
     list.appendChild(newCommentElement);
   });
@@ -51,9 +51,9 @@ const renderComments = (comments) => {
   allComments = comments;
   totalCount.textContent = comments.length.toString();
   list.innerHTML = '';
-  loadNextComments();
+  onLoaderButtonClick();
 };
 
-loaderButton.addEventListener('click', loadNextComments);
+loaderButton.addEventListener('click', onLoaderButtonClick);
 
 export { renderComments };
